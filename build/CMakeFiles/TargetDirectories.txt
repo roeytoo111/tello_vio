@@ -1,0 +1,6 @@
+/home/roey/tello/build/CMakeFiles/h264decoder.dir
+/home/roey/tello/build/CMakeFiles/utils.dir
+/home/roey/tello/build/CMakeFiles/tello.dir
+/home/roey/tello/build/CMakeFiles/tello_imu_check.dir
+/home/roey/tello/build/CMakeFiles/edit_cache.dir
+/home/roey/tello/build/CMakeFiles/rebuild_cache.dir

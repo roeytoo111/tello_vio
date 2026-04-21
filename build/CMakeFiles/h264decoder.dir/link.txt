@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -g -O0 -DDEBUG -shared -Wl,-soname,libh264decoder.so -o libh264decoder.so CMakeFiles/h264decoder.dir/lib_h264decoder/h264decoder.cpp.o  -lavcodec -lavutil -lswscale 

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g -O0 -DDEBUG CMakeFiles/tello_imu_check.dir/main/check_imu.cpp.o -o tello_imu_check 

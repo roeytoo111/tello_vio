@@ -1,0 +1,30 @@
+groups: 1
+
+group0:
+  types: 1
+  type0:
+    type_id: "prime"
+    members: 1
+
+prime:
+  drone_ip: "192.168.10.1"
+  drone_port: "8889"
+  video_port: "11111"
+  state_port: "8890"
+  retries: 0
+  timeout: 5
+  slam: "openvslam"
+  camera_config_file: "../camera_config.yaml"
+  vocabulary_file: "../orb_vocab.dbow2"
+  sequence_file: "../sequence.txt"
+  retries: 0
+  timeout: 5
+  load_map_db_path: ""
+  save_map_db_path: ""
+  mask_img_path: ""
+  load_map: false
+  continue_mapping: false
+  scale: 1
+
+# wifi
+# joystick

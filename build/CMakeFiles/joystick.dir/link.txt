@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -g -O0 -DDEBUG -shared -Wl,-soname,libjoystick.so -o libjoystick.so CMakeFiles/joystick.dir/lib_joystick/joystick.cpp.o 
