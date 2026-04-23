@@ -59,6 +59,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc
                     ${CMAKE_CURRENT_SOURCE_DIR}/lib_h264decoder
                     ${CMAKE_CURRENT_SOURCE_DIR}/lib_utils
                     ${CMAKE_CURRENT_SOURCE_DIR}/lib_openvslam/openvslam/src
+                    ${CMAKE_CURRENT_SOURCE_DIR}/monocular_vo/include
                     ${EIGEN3_INCLUDE_DIR}
                    )
 
@@ -146,6 +147,7 @@ endif()
 
 add_executable( ${PROJECT_NAME}
                 ${CMAKE_CURRENT_SOURCE_DIR}/main/main.cpp
+                ${CMAKE_CURRENT_SOURCE_DIR}/monocular_vo/src/vo.cpp
                 ${LIB_SOURCES}
                 ${LIB_HEADERS}
               )

@@ -1,163 +1,159 @@
 #include "vo.h"
+#include "frame_queue.hpp"
+#include "state_socket.hpp"
 
-#define MAX_FRAME 1000
 #define MIN_NUM_FEAT 2000
 
-double getAbsoluteScale(int frame_id)
+static double estimateScale(StateSocket& state, double dt)
 {
-
-  string line;
-  int i = 0;
-  std::filesystem::path dataset_path = std::filesystem::current_path() / "../kitti_dataset" / "data_odometry_poses/dataset/poses/00.txt";
-  ifstream myfile(dataset_path.string());
-  double x = 0, y = 0, z = 0;
-  double x_prev, y_prev, z_prev;
-  if (myfile.is_open())
-  {
-    while ((getline(myfile, line)) && (i <= frame_id))
-    {
-      z_prev = z;
-      x_prev = x;
-      y_prev = y;
-      std::istringstream in(line);
-      for (int j = 0; j < 12; j++)
-      {
-        in >> z;
-        if (j == 7)
-          y = z;
-        if (j == 3)
-          x = z;
-      }
-
-      i++;
-    }
-    myfile.close();
-  }
-
-  else
-  {
-    cout << "Unable to open file";
-    return 0;
-  }
-
-  return sqrt((x - x_prev) * (x - x_prev) + (y - y_prev) * (y - y_prev) + (z - z_prev) * (z - z_prev));
+  double vx = state.getVgx() / 100.0;  // cm/s -> m/s
+  double vy = state.getVgy() / 100.0;
+  double vz = state.getVgz() / 100.0;
+  double speed = sqrt(vx * vx + vy * vy + vz * vz);
+  return speed * dt;
 }
 
-int VisualOdometry::run(string dataset_path)
+int VisualOdometry::run(FrameQueue& frame_queue, StateSocket& state_socket,
+                        const string& camera_config_path, atomic<bool>& run_flag)
 {
-  Mat img_1, img_2;
-  Mat R_f, t_f; // the final rotation and tranlation vectors containing the camera pose
+  // ---- calibration ----
+  double focal;
+  Point2d pp;
+  Mat camera_matrix, dist_coeffs;
+  getCalibrationData(camera_config_path, focal, pp, camera_matrix, dist_coeffs);
 
-  double scale = 1.00;
-  char filename1[200];
-  char filename2[200];
-  sprintf(filename1, (dataset_path + "image_0/%06d.png").c_str(), 0);
-  sprintf(filename2, (dataset_path + "image_0/%06d.png").c_str(), 1);
+  // ---- undistortion maps (built from the first frame's resolution) ----
+  Mat map1, map2;
 
-  char text[100];
-  int font_face = FONT_HERSHEY_PLAIN;
+  // ---- display helpers ----
+  char text[200];
+  int font_face  = FONT_HERSHEY_PLAIN;
   double font_scale = 1;
-  int thickness = 1;
-  cv::Point text_org(10, 50);
+  int thickness   = 1;
+  Point text_org(10, 50);
 
-  // read the first two frames from the dataset for initial setup
-  Mat img_1_c = imread(filename1);
-  Mat img_2_c = imread(filename2);
+  // ---- wait for the first two frames ----
+  Mat img_1_c, img_2_c;
+  cout << "[VO] Waiting for first frame..." << endl;
+  while (run_flag && !frame_queue.pop(img_1_c, 1000)) {}
+  if (!run_flag) return 0;
 
-  if (!img_1_c.data || !img_2_c.data)
-  {
-    std::cout << "Error reading images! " << std::endl;
+  Size frame_size = img_1_c.size();
+  Mat optimal_K = getOptimalNewCameraMatrix(camera_matrix, dist_coeffs, frame_size, 0);
+  initUndistortRectifyMap(camera_matrix, dist_coeffs, Mat(),
+                          optimal_K, frame_size, CV_16SC2, map1, map2);
+
+  cout << "[VO] Waiting for second frame..." << endl;
+  while (run_flag && !frame_queue.pop(img_2_c, 1000)) {}
+  if (!run_flag) return 0;
+
+  // ---- undistort & convert to grey ----
+  Mat img_1_u, img_2_u, img_1, img_2;
+  remap(img_1_c, img_1_u, map1, map2, INTER_LINEAR);
+  remap(img_2_c, img_2_u, map1, map2, INTER_LINEAR);
+  cvtColor(img_1_u, img_1, COLOR_BGR2GRAY);
+  cvtColor(img_2_u, img_2, COLOR_BGR2GRAY);
+
+  // ---- initial feature detection & tracking ----
+  vector<Point2f> points1, points2;
+  featureDetection(img_1, points1);
+  if (points1.empty()) {
+    cout << "[VO] No features in first frame" << endl;
     return -1;
   }
 
-  // use grayscale images
-  cvtColor(img_1_c, img_1, COLOR_BGR2GRAY);
-  cvtColor(img_2_c, img_2, COLOR_BGR2GRAY);
-
-  // feature detection, tracking
-  vector<Point2f> points1, points2; // vectors to store the coordinates of the feature points
-  featureDetection(img_1, points1); // detect features in img_1
   vector<uchar> status;
-  featureTracking(img_1, img_2, points1, points2, status); // track those features to img_2
+  featureTracking(img_1, img_2, points1, points2, status);
+  if (points1.size() < 5 || points2.size() < 5) {
+    cout << "[VO] Not enough features for initial pose" << endl;
+    return -1;
+  }
 
-  double focal;
-  cv::Point2d pp;
-  getCalibrationData(dataset_path, focal, pp);
-
-  // recovering the pose and the essential matrix
+  // ---- initial pose ----
   Mat E, R, t, mask;
   E = findEssentialMat(points2, points1, focal, pp, RANSAC, 0.999, 1.0, mask);
   recoverPose(E, points2, points1, R, t, focal, pp, mask);
+
+  Mat R_f = R.clone();
+  Mat t_f = t.clone();
   Mat prev_image = img_2;
   Mat curr_image;
   vector<Point2f> prev_features = points2;
   vector<Point2f> curr_features;
 
-  char filename[100];
-
-  R_f = R.clone();
-  t_f = t.clone();
-
-  clock_t begin = clock();
-
-  namedWindow("Road facing Egomotion camera", WINDOW_AUTOSIZE); // Camera Display Window
-  namedWindow("Trajectory", WINDOW_AUTOSIZE);                   // Trajectory Display Window
-
+  namedWindow("Tello Camera", WINDOW_AUTOSIZE);
+  namedWindow("Trajectory",   WINDOW_AUTOSIZE);
   Mat traj = Mat::zeros(600, 600, CV_8UC3);
 
-  for (int num_frame = 2; num_frame < MAX_FRAME; num_frame++)
+  auto prev_time = chrono::steady_clock::now();
+  int num_frame = 2;
+  cout << "[VO] Running — press ESC in the Tello window to quit" << endl;
+
+  while (run_flag)
   {
-    sprintf(filename, (dataset_path + "image_0/%06d.png").c_str(), num_frame);
-    Mat curr_image_c = imread(filename);
-    cvtColor(curr_image_c, curr_image, COLOR_BGR2GRAY);
-    vector<uchar> status;
-    featureTracking(prev_image, curr_image, prev_features, curr_features, status);
+    Mat curr_image_c;
+    if (!frame_queue.pop(curr_image_c, 500)) continue;
+
+    auto curr_time = chrono::steady_clock::now();
+    double dt = chrono::duration<double>(curr_time - prev_time).count();
+    prev_time = curr_time;
+
+    // Undistort
+    Mat curr_undist;
+    remap(curr_image_c, curr_undist, map1, map2, INTER_LINEAR);
+    cvtColor(curr_undist, curr_image, COLOR_BGR2GRAY);
+
+    // Track features
+    vector<uchar> st;
+    featureTracking(prev_image, curr_image, prev_features, curr_features, st);
+
+    if (curr_features.size() < 5 || prev_features.size() < 5) {
+      featureDetection(curr_image, prev_features);
+      prev_image = curr_image.clone();
+      num_frame++;
+      continue;
+    }
 
     E = findEssentialMat(curr_features, prev_features, focal, pp, RANSAC, 0.999, 1.0, mask);
     recoverPose(E, curr_features, prev_features, R, t, focal, pp, mask);
-    Mat prevPts(2, prev_features.size(), CV_64F), currPts(2, curr_features.size(), CV_64F);
 
-    for (int i = 0; i < prev_features.size(); i++)
+    double scale = estimateScale(state_socket, dt);
+
+    if ((scale > 0.01) &&
+        (t.at<double>(2) > t.at<double>(0)) &&
+        (t.at<double>(2) > t.at<double>(1)))
     {
-      prevPts.at<double>(0, i) = prev_features.at(i).x;
-      prevPts.at<double>(1, i) = prev_features.at(i).y;
-
-      currPts.at<double>(0, i) = curr_features.at(i).x;
-      currPts.at<double>(1, i) = curr_features.at(i).y;
+      t_f = t_f + scale * (R_f * t);
+      R_f = R * R_f;
     }
 
-    scale = getAbsoluteScale(num_frame);
-
-    if ((scale > 0.1) && (t.at<double>(2) > t.at<double>(0)) && (t.at<double>(2) > t.at<double>(1)))
-    {
-
-      t_f = t_f + scale * (R_f * t); // t_final = t_previous + scale * (R_previous * t_current)
-      R_f = R * R_f;                 // R_final = R_current * R_previous
-    }
-
-    // a redetection is triggered in case the number of features being trakced go below a particular threshold
-    if (prev_features.size() < MIN_NUM_FEAT)
+    // Re-detect when tracked features drop too low
+    if ((int)prev_features.size() < MIN_NUM_FEAT)
     {
       featureDetection(prev_image, prev_features);
-      featureTracking(prev_image, curr_image, prev_features, curr_features, status);
+      featureTracking(prev_image, curr_image, prev_features, curr_features, st);
     }
 
     prev_image = curr_image.clone();
     prev_features = curr_features;
 
-    int x = int(t_f.at<double>(0)) + 300;      // offset for easier visualisation
-    int y = int(-1 * t_f.at<double>(2)) + 500; // -1 inversion and offset for easier visualisation
-    circle(traj, Point(x, y), 1, CV_RGB(255, 0, 0), 2);
+    // ---- trajectory visualisation (scaled to pixels) ----
+    int draw_x = max(0, min(599, int(t_f.at<double>(0) * 100) + 300));
+    int draw_y = max(0, min(599, int(-1 * t_f.at<double>(2) * 100) + 300));
+    circle(traj, Point(draw_x, draw_y), 1, CV_RGB(255, 0, 0), 2);
 
-    rectangle(traj, Point(10, 30), Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
-    sprintf(text, "Coordinates: x = %02fm y = %02fm z = %02fm", t_f.at<double>(0), t_f.at<double>(1), t_f.at<double>(2));
+    rectangle(traj, Point(10, 30), Point(590, 50), CV_RGB(0, 0, 0), FILLED);
+    sprintf(text, "x=%.2fm y=%.2fm z=%.2fm  scale=%.4f",
+            t_f.at<double>(0), t_f.at<double>(1), t_f.at<double>(2), scale);
     putText(traj, text, text_org, font_face, font_scale, Scalar::all(255), thickness, 8);
 
-    imshow("Road facing Egomotion camera", curr_image_c);
-    imshow("Trajectory", traj);
-
+    imshow("Tello Camera", curr_undist);
+    imshow("Trajectory",   traj);
     waitKey(1);
+
+    num_frame++;
   }
 
+  cout << "[VO] Stopped after " << num_frame << " frames" << endl;
   return 0;
 }

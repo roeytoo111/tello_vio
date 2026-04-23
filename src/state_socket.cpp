@@ -173,8 +173,8 @@ void StateSocket::handleResponseFromDrone(const std::error_code& error, size_t b
       last_rate_calculation_time_ = now_high_res;
     }
     
-    // Note: IMU processing for VO is now handled by test_vo.cpp or other implementations
-    
+    updateTelemetry(response_);
+
     // Rate limit IMU display to once per second (state updates ~10 times per second)
     auto now = std::chrono::system_clock::now();
     auto time_since_last = std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -210,4 +210,19 @@ void StateSocket::handleSendCommand(const std::error_code& error, size_t bytes_s
   std::cout << "StateSocket class does not implement handleSendCommand()" << std::endl;
 }
 
-// parseIMUData removed - IMU processing is now handled by test_vo.cpp or other VO implementations
+void StateSocket::updateTelemetry(const std::string& state_str) {
+  std::istringstream iss(state_str);
+  std::string token;
+  while (std::getline(iss, token, ';')) {
+    size_t colon_pos = token.find(':');
+    if (colon_pos == std::string::npos) continue;
+    std::string key = token.substr(0, colon_pos);
+    std::string value = token.substr(colon_pos + 1);
+    try {
+      if (key == "vgx") vgx_.store(std::stoi(value));
+      else if (key == "vgy") vgy_.store(std::stoi(value));
+      else if (key == "vgz") vgz_.store(std::stoi(value));
+      else if (key == "h") height_.store(std::stoi(value));
+    } catch (...) {}
+  }
+}

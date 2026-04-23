@@ -9,6 +9,7 @@
 
 #include "base_socket.hpp"
 #include "h264decoder.hpp"
+#include "frame_queue.hpp"
 
 #ifdef RUN_SLAM
 #include "openvslam_api.hpp"
@@ -70,6 +71,12 @@ public:
   */
   void setSnapshot();
 
+  /**
+  * @brief Set the frame queue for VO consumption. When set, decoded frames
+  *        are pushed to this queue and the built-in imshow display is skipped.
+  */
+  void setFrameQueue(FrameQueue* queue) { frame_queue_ = queue; }
+
 private:
 
   void handleResponseFromDrone(const std::error_code& error, size_t r) override;
@@ -102,6 +109,10 @@ private:
   
   // Pointer to LocalizationManager for VIO
   LocalizationManager* localization_manager_;
+
+  // Frame queue for external consumers (VO). When non-null, frames are
+  // pushed here and the built-in imshow display is skipped.
+  FrameQueue* frame_queue_ = nullptr;
 };
 
 #endif // VIDEOSOCKET_HPP

@@ -39,12 +39,21 @@ public:
   */
   int getLastBattery() const { return last_battery_.load(); }
 
+  /** @brief Get velocity components in cm/s */
+  int getVgx() const { return vgx_.load(); }
+  int getVgy() const { return vgy_.load(); }
+  int getVgz() const { return vgz_.load(); }
+
+  /** @brief Get height in cm */
+  int getHeight() const { return height_.load(); }
+
 private:
 
   virtual void handleResponseFromDrone(const std::error_code& error, size_t bytes_recvd) override;
   virtual void handleSendCommand(const std::error_code& error, size_t bytes_sent, std::string cmd) override;
   
   void parseAndDisplayIMU(const std::string& state_str);
+  void updateTelemetry(const std::string& state_str);
 
   enum{ max_length_ = 1024 };
   bool received_response_ = true;
@@ -71,6 +80,10 @@ private:
 
   // Last known battery percentage (updated in parseAndDisplayIMU)
   std::atomic<int> last_battery_{-1};
+
+  // Telemetry for VO scale estimation (updated on every state message)
+  std::atomic<int> vgx_{0}, vgy_{0}, vgz_{0};
+  std::atomic<int> height_{0};
 
 };
 

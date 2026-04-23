@@ -141,33 +141,31 @@ void VideoSocket::decodeFrame()
 
         cv::Mat mat{frame.height, frame.width, CV_8UC3, bgr24};
 
-        // Note: VO processing is now handled by test_vo.cpp or other implementations
-
         if(snap_) takeSnapshot(mat);
 
 #ifdef RECORD
         video->write(mat.clone());
 #endif
 
+        if (frame_queue_) {
+          frame_queue_->push(mat);
+        }
 #ifdef RUN_SLAM
-        cv::Mat greyMat;
-        cv::cvtColor(mat, greyMat, cv::COLOR_BGR2GRAY);
-        api_->addFrameToQueue(greyMat);
-        // NOTE: In case there are some gdk/pangolin crashes
-        // 1. comment out the 3 lines below and display only the frame displayed
-        //    with keypoints on L92 of pangolin_viewer/viewer.cc
-        // OR
-        // 2. Comment out L96-99 of pangolin_viewer/viewer.cc and amke install
-        //    OpenVSLAM
-        // and then rebuild the code
-        {
-          std::unique_lock<std::mutex> lk(api_->getMutex());
+        else {
+          cv::Mat greyMat;
+          cv::cvtColor(mat, greyMat, cv::COLOR_BGR2GRAY);
+          api_->addFrameToQueue(greyMat);
+          {
+            std::unique_lock<std::mutex> lk(api_->getMutex());
+            cv::imshow("Pilot view", mat.clone());
+            cv::waitKey(1);
+          }
+        }
+#else
+        else {
           cv::imshow("Pilot view", mat.clone());
           cv::waitKey(1);
         }
-#else
-        cv::imshow("Pilot view", mat.clone());
-        cv::waitKey(1);
 #endif
       }
       next += consumed;
