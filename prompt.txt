@@ -1,8 +1,0 @@
-Modify the Visual Odometry pipeline in `monocular_vo/src/vo.cpp` to work with a live Tello drone stream instead of the KITTI dataset. 
-
-Key changes required:
-1. Replace the file-reading loop in `VisualOdometry::run` with a logic that accepts frames from the `h264decoder` used in `src/video_socket.cpp`.
-2. Remove the dependency on `getAbsoluteScale` which reads from `00.txt`. Instead, implement a placeholder or logic to receive real-time telemetry (like height or velocity) from `src/state_socket.cpp` to estimate scale.
-3. Update `getCalibrationData` to use the parameters from `camera_config.yaml` instead of hardcoded KITTI values.
-4. Ensure the `main` function initializes the `Tello` class and passes the decoded video frames to the VO runner.
-5. Use the existing `lib_h264decoder` and `video_socket` components already present in the project to pipe the images.
