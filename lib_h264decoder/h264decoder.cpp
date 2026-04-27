@@ -33,8 +33,6 @@ typedef unsigned char ubyte;
 
 H264Decoder::H264Decoder()
 {
-  avcodec_register_all();
-
   codec = avcodec_find_decoder(AV_CODEC_ID_H264);
   if (!codec)
     throw H264InitFailure("cannot find decoder");
@@ -59,32 +57,43 @@ H264Decoder::H264Decoder()
   if (!frame)
     throw H264InitFailure("cannot allocate frame");
 
-#if 1
-  pkt = new AVPacket;
+  pkt = av_packet_alloc();
   if (!pkt)
     throw H264InitFailure("cannot allocate packet");
-  av_init_packet(pkt);
-#endif
 }
 
 
 H264Decoder::~H264Decoder()
 {
   av_parser_close(parser);
-  avcodec_close(context);
-  av_free(context);
+  avcodec_free_context(&context);
   av_frame_free(&frame);
-#if 1
-  delete pkt;
-#endif
+  av_packet_free(&pkt);
 }
 
 
 ssize_t H264Decoder::parse(const ubyte* in_data, ssize_t in_size)
 {
-  auto nread = av_parser_parse2(parser, context, &pkt->data, &pkt->size,
-    in_data, in_size,
+  // Clear any previous packet references before parsing new data.
+  av_packet_unref(pkt);
+  packet_sent_ = false;
+
+  // av_parser_parse2 returns a pointer to an internal buffer (out_data/out_size).
+  // We copy it into an AVPacket that owns its memory so downstream send_packet()
+  // always sees a stable buffer.
+  uint8_t* out_data = nullptr;
+  int out_size = 0;
+  const ssize_t nread = av_parser_parse2(parser, context, &out_data, &out_size,
+    in_data, static_cast<int>(in_size),
     0, 0, AV_NOPTS_VALUE);
+
+  if (out_size > 0 && out_data) {
+    if (av_new_packet(pkt, out_size) < 0) {
+      throw H264DecodeFailure("error allocating packet\n");
+    }
+    memcpy(pkt->data, out_data, static_cast<size_t>(out_size));
+  }
+
   return nread;
 }
 
@@ -94,13 +103,49 @@ bool H264Decoder::is_frame_available() const
   return pkt->size > 0;
 }
 
-
-const AVFrame& H264Decoder::decode_frame()
+void H264Decoder::feed_packet(const ubyte* data, size_t size)
 {
-  int got_picture = 0;
-  int nread = avcodec_decode_video2(context, frame, &got_picture, pkt);
-  if (nread < 0 || got_picture == 0)
-    throw H264DecodeFailure("error decoding frame\n");
+  av_packet_unref(pkt);
+  packet_sent_ = false;
+  if (size == 0) {
+    pkt->data = nullptr;
+    pkt->size = 0;
+    return;
+  }
+  if (av_new_packet(pkt, static_cast<int>(size)) < 0) {
+    throw H264DecodeFailure("error allocating packet\n");
+  }
+  memcpy(pkt->data, data, size);
+}
+
+bool H264Decoder::try_decode()
+{
+  if (pkt->size <= 0) return false;
+
+  // Send packet only once; then drain frames with receive_frame().
+  if (!packet_sent_) {
+    int err = avcodec_send_packet(context, pkt);
+    if (err == AVERROR(EAGAIN)) {
+      // Need to drain frames first.
+    } else if (err < 0) {
+      throw H264DecodeFailure("error sending packet\n");
+    } else {
+      packet_sent_ = true;
+    }
+  }
+
+  const int err = avcodec_receive_frame(context, frame);
+  if (err == 0) {
+    return true;
+  }
+  if (err == AVERROR(EAGAIN) || err == AVERROR_EOF) {
+    return false;
+  }
+  throw H264DecodeFailure("error receiving frame\n");
+}
+
+const AVFrame& H264Decoder::get_frame() const
+{
   return *frame;
 }
 

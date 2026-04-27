@@ -30,6 +30,77 @@ import os
 import argparse
 from datetime import datetime
 import shutil
+import csv
+
+def _try_load_csv_trajectory(filename):
+    """
+    Support new CSV outputs produced by this repo:
+    - trajectories/vio_trajectory_*.csv: columns x_m,y_m,z_m
+    - telemetry/tello_state_*.csv: columns t_sec,vgx,vgy,vgz (cm/s) -> integrate to meters
+    """
+    try:
+        with open(filename, "r", newline="") as f:
+            # Peek header
+            first = f.readline()
+            if not first:
+                return None
+            f.seek(0)
+            reader = csv.DictReader(f)
+            if not reader.fieldnames:
+                return None
+
+            fields = set([h.strip() for h in reader.fieldnames if h])
+
+            # Case 1: VIO pose CSV
+            if {"x_m", "y_m", "z_m"}.issubset(fields):
+                pts = []
+                for row in reader:
+                    try:
+                        x = float(row.get("x_m", ""))
+                        y = float(row.get("y_m", ""))
+                        z = float(row.get("z_m", ""))
+                    except Exception:
+                        continue
+                    pts.append([x, y, z])
+                return np.array(pts) if len(pts) else None
+
+            # Case 2: Telemetry CSV (integrate velocity)
+            if {"t_sec", "vgx", "vgy", "vgz"}.issubset(fields):
+                # Collect samples
+                samples = []
+                for row in reader:
+                    try:
+                        t = float(row.get("t_sec", ""))
+                        # cm/s -> m/s
+                        vx = float(row.get("vgx", "0")) / 100.0
+                        vy = float(row.get("vgy", "0")) / 100.0
+                        vz = float(row.get("vgz", "0")) / 100.0
+                    except Exception:
+                        continue
+                    samples.append((t, vx, vy, vz))
+                if len(samples) < 2:
+                    return None
+
+                samples.sort(key=lambda s: s[0])
+                x = y = z = 0.0
+                pts = [[0.0, 0.0, 0.0]]
+                last_t = samples[0][0]
+                for (t, vx, vy, vz) in samples[1:]:
+                    dt = t - last_t
+                    # Skip crazy gaps/duplicates
+                    if dt <= 0 or dt > 1.0:
+                        last_t = t
+                        continue
+                    x += vx * dt
+                    y += vy * dt
+                    z += vz * dt
+                    pts.append([x, y, z])
+                    last_t = t
+                return np.array(pts) if len(pts) else None
+
+            return None
+    except Exception:
+        return None
 
 def backup_and_reset_trajectory(filename, no_backup=False):
     """Backup existing trajectory file and reset it for new data.
@@ -145,6 +216,13 @@ def load_trajectory(filename):
             print("Could not find trajectory_data.txt in any of the expected locations.")
             return None
     
+    # First try CSV formats
+    if filename.lower().endswith(".csv"):
+        traj = _try_load_csv_trajectory(filename)
+        if traj is not None and len(traj) > 0:
+            print(f"Loaded {len(traj)} trajectory points from CSV {filename}")
+            return traj
+
     try:
         with open(filename, 'r') as f:
             lines = f.readlines()

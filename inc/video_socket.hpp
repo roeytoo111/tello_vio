@@ -2,6 +2,9 @@
 #define VIDEOSOCKET_HPP
 
 #include <atomic>
+#include <chrono>
+#include <array>
+#include <vector>
 
 #include <libavutil/frame.h>
 #include <opencv2/core/core.hpp>
@@ -82,7 +85,7 @@ private:
   void handleResponseFromDrone(const std::error_code& error, size_t r) override;
   void handleSendCommand(const std::error_code& error, size_t bytes_sent, std::string cmd) override;
 
-  void decodeFrame();
+  void decodeBytes(const unsigned char* data, size_t len);
   void takeSnapshot(cv::Mat& image);
 
   enum{ max_length_ =  2048 };
@@ -90,10 +93,20 @@ private:
   bool received_response_ = true;
 
   char data_[max_length_];
-  char frame_buffer_[max_length_large_];
+  // H264 bytestream buffer. We append UDP payloads here and let the FFmpeg
+  // parser assemble full frames across packet boundaries.
+  std::vector<unsigned char> h264_stream_buf_;
+  size_t h264_stream_off_ = 0;
+  std::atomic<int64_t> last_decode_attempt_ms_{0};
 
-  size_t first_empty_index = 0;
-  int frame_buffer_n_packets_ = 0;
+  // Reused conversion buffer to avoid frequent large allocations.
+  std::vector<unsigned char> bgr24_buf_;
+
+  // Gate output until we have a clean keyframe (SPS/PPS + IDR).
+  bool have_sps_ = false;
+  bool have_pps_ = false;
+  bool have_idr_ = false;
+  int consecutive_decode_failures_ = 0;
 
   H264Decoder decoder_;
   ConverterRGB24 converter_;
@@ -113,6 +126,20 @@ private:
   // Frame queue for external consumers (VO). When non-null, frames are
   // pushed here and the built-in imshow display is skipped.
   FrameQueue* frame_queue_ = nullptr;
+
+  // Decode telemetry
+  std::atomic<uint64_t> decoded_frames_{0};
+  std::atomic<uint64_t> decode_failures_{0};
+  std::atomic<int> last_frame_w_{0};
+  std::atomic<int> last_frame_h_{0};
+  std::atomic<int64_t> last_frame_ms_{0};
+
+  // Packet sampling for debugging stream format
+  std::array<std::atomic<uint8_t>, 8> last_pkt_prefix_{
+    std::atomic<uint8_t>(0), std::atomic<uint8_t>(0), std::atomic<uint8_t>(0), std::atomic<uint8_t>(0),
+    std::atomic<uint8_t>(0), std::atomic<uint8_t>(0), std::atomic<uint8_t>(0), std::atomic<uint8_t>(0)
+  };
+  std::atomic<size_t> last_pkt_len_{0};
 };
 
 #endif // VIDEOSOCKET_HPP

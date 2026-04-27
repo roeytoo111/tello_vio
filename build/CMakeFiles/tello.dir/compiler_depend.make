@@ -977,6 +977,11 @@ CMakeFiles/tello.dir/main/main.cpp.o: ../main/main.cpp \
   /usr/include/c++/11/queue \
   /usr/include/c++/11/bits/stl_queue.h \
   ../inc/state_socket.hpp \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
   ../inc/frame_queue.hpp \
   ../monocular_vo/include/vo.h \
   ../monocular_vo/include/vo_utils.h \
@@ -993,12 +998,7 @@ CMakeFiles/tello.dir/main/main.cpp.o: ../main/main.cpp \
   /usr/include/opencv4/opencv2/flann/defines.h \
   /usr/include/opencv4/opencv2/flann/config.h \
   /usr/include/opencv4/opencv2/core/affine.hpp \
-  /usr/include/opencv4/opencv2/imgproc/imgproc.hpp \
-  /usr/include/c++/11/fstream \
-  /usr/include/c++/11/bits/codecvt.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
-  /usr/include/c++/11/bits/fstream.tcc
+  /usr/include/opencv4/opencv2/imgproc/imgproc.hpp
 
 CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o: ../monocular_vo/src/vo.cpp \
   /usr/include/stdc-predef.h \
@@ -1972,7 +1972,22 @@ CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o: ../monocular_vo/src/vo.cpp \
   /usr/include/asio/windows/stream_handle.hpp \
   /usr/include/asio/write.hpp \
   /usr/include/asio/write_at.hpp \
-  /usr/include/asio/impl/write_at.hpp
+  /usr/include/asio/impl/write_at.hpp \
+  /usr/include/c++/11/filesystem \
+  /usr/include/c++/11/bits/fs_fwd.h \
+  /usr/include/c++/11/bits/fs_path.h \
+  /usr/include/c++/11/locale \
+  /usr/include/c++/11/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/11/bits/locale_conv.h \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/bits/quoted_string.h \
+  /usr/include/c++/11/codecvt \
+  /usr/include/c++/11/bits/fs_dir.h \
+  /usr/include/c++/11/bits/fs_ops.h
 
 CMakeFiles/tello.dir/src/base_socket.cpp.o: ../src/base_socket.cpp \
   /usr/include/stdc-predef.h \
@@ -4638,6 +4653,11 @@ CMakeFiles/tello.dir/src/state_socket.cpp.o: ../src/state_socket.cpp \
   /usr/include/asio/write.hpp \
   /usr/include/asio/write_at.hpp \
   /usr/include/asio/impl/write_at.hpp \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
   ../lib_utils/utils.hpp \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/map \
@@ -4650,7 +4670,6 @@ CMakeFiles/tello.dir/src/state_socket.cpp.o: ../src/state_socket.cpp \
   /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
   /usr/include/libintl.h \
-  /usr/include/c++/11/bits/codecvt.h \
   /usr/include/c++/11/bits/locale_facets_nonio.tcc \
   /usr/include/c++/11/bits/locale_conv.h \
   /usr/include/c++/11/bits/quoted_string.h \
@@ -4677,7 +4696,13 @@ CMakeFiles/tello.dir/src/state_socket.cpp.o: ../src/state_socket.cpp \
   /usr/include/c++/11/tr1/modified_bessel_func.tcc \
   /usr/include/c++/11/tr1/poly_hermite.tcc \
   /usr/include/c++/11/tr1/poly_laguerre.tcc \
-  /usr/include/c++/11/tr1/riemann_zeta.tcc
+  /usr/include/c++/11/tr1/riemann_zeta.tcc \
+  /usr/include/c++/11/filesystem \
+  /usr/include/c++/11/bits/fs_fwd.h \
+  /usr/include/c++/11/bits/fs_path.h \
+  /usr/include/c++/11/codecvt \
+  /usr/include/c++/11/bits/fs_dir.h \
+  /usr/include/c++/11/bits/fs_ops.h
 
 CMakeFiles/tello.dir/src/tello.cpp.o: ../src/tello.cpp \
   /usr/include/stdc-predef.h \
@@ -5869,6 +5894,19 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/locale \
+  /usr/include/c++/11/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/11/bits/locale_conv.h \
+  /usr/include/c++/11/bits/unique_ptr.h \
+  /usr/include/c++/11/bits/quoted_string.h \
   /usr/include/x86_64-linux-gnu/libavutil/frame.h \
   /usr/include/x86_64-linux-gnu/libavutil/avutil.h \
   /usr/include/x86_64-linux-gnu/libavutil/common.h \
@@ -5963,7 +6001,6 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
   /usr/include/c++/11/bits/align.h \
   /usr/include/c++/11/bit \
-  /usr/include/c++/11/bits/unique_ptr.h \
   /usr/include/c++/11/bits/shared_ptr.h \
   /usr/include/c++/11/bits/shared_ptr_base.h \
   /usr/include/c++/11/bits/allocated_ptr.h \
@@ -5991,8 +6028,6 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
   /usr/include/opencv4/opencv2/core/operations.hpp \
   /usr/include/opencv4/opencv2/core/cvstd.inl.hpp \
   /usr/include/c++/11/complex \
-  /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc \
   /usr/include/opencv4/opencv2/core/utility.hpp \
   /usr/include/opencv4/opencv2/core/optim.hpp \
   /usr/include/opencv4/opencv2/core/ovx.hpp \
@@ -6643,10 +6678,6 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
   ../lib_utils/utils.hpp
 
 
-/usr/include/c++/11/bits/locale_facets_nonio.h:
-
-/usr/include/c++/11/locale:
-
 /usr/include/c++/11/bits/stl_tree.h:
 
 /usr/include/c++/11/map:
@@ -6655,15 +6686,17 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
 
 ../src/command_socket.cpp:
 
+/usr/include/c++/11/bits/fs_ops.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.h:
+
+/usr/include/c++/11/locale:
+
+/usr/include/c++/11/bits/fs_path.h:
+
+/usr/include/c++/11/filesystem:
+
 ../monocular_vo/src/vo.cpp:
-
-/usr/include/c++/11/bits/fstream.tcc:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
-
-/usr/include/c++/11/bits/codecvt.h:
 
 /usr/include/opencv4/opencv2/imgproc/imgproc.hpp:
 
@@ -6682,6 +6715,14 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
 ../monocular_vo/include/vo_utils.h:
 
 ../monocular_vo/include/vo.h:
+
+/usr/include/c++/11/bits/fstream.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
+
+/usr/include/c++/11/bits/codecvt.h:
 
 /usr/include/c++/11/bits/stl_queue.h:
 
@@ -6860,6 +6901,8 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
 /usr/include/asio/ip/basic_resolver_iterator.hpp:
 
 /usr/include/asio/ip/detail/endpoint.hpp:
+
+/usr/include/c++/11/bits/fs_fwd.h:
 
 /usr/include/asio/ip/udp.hpp:
 
@@ -7078,6 +7121,8 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
 /usr/include/asio/detail/impl/socket_ops.ipp:
 
 ../src/base_socket.cpp:
+
+/usr/include/c++/11/bits/fs_dir.h:
 
 /usr/include/asio/detail/socket_ops.hpp:
 
@@ -8054,6 +8099,8 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp \
 /usr/include/asio/execution/any_executor.hpp:
 
 /usr/include/asio/detail/assert.hpp:
+
+/usr/include/c++/11/codecvt:
 
 /usr/include/c++/11/bits/allocated_ptr.h:
 

@@ -2,5 +2,6 @@
 /home/roey/tello_vio/build/CMakeFiles/utils.dir
 /home/roey/tello_vio/build/CMakeFiles/tello.dir
 /home/roey/tello_vio/build/CMakeFiles/tello_imu_check.dir
+/home/roey/tello_vio/build/CMakeFiles/tello_video_check.dir
 /home/roey/tello_vio/build/CMakeFiles/edit_cache.dir
 /home/roey/tello_vio/build/CMakeFiles/rebuild_cache.dir

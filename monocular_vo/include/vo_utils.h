@@ -90,27 +90,39 @@ inline void featureTracking(Mat img_1, Mat img_2,
                              vector<Point2f>& points2,
                              vector<uchar>& status)
 {
+  if (points1.empty()) {
+    points2.clear();
+    status.clear();
+    return;
+  }
+
   vector<float> err;
   Size window_size = Size(21, 21);
   TermCriteria term_criteria = TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 30, 0.01);
 
   calcOpticalFlowPyrLK(img_1, img_2, points1, points2, status, err, window_size, 3, term_criteria, 0, 0.001);
 
-  int index_correction = 0;
-  for (int i = 0; i < (int)status.size(); i++)
-  {
-    Point2f pt = points2.at(i - index_correction);
-    if ((status.at(i) == 0) || (pt.x < 0) || (pt.y < 0))
-    {
-      if ((pt.x < 0) || (pt.y < 0))
-      {
-        status.at(i) = 0;
-      }
-      points1.erase(points1.begin() + (i - index_correction));
-      points2.erase(points2.begin() + (i - index_correction));
-      index_correction++;
-    }
+  // Filter tracked points safely (avoid erase-while-iterating pitfalls).
+  vector<Point2f> p1_f;
+  vector<Point2f> p2_f;
+  vector<uchar> st_f;
+  p1_f.reserve(points1.size());
+  p2_f.reserve(points2.size());
+  st_f.reserve(status.size());
+
+  const size_t n = std::min(points1.size(), points2.size());
+  for (size_t i = 0; i < n && i < status.size(); i++) {
+    const Point2f& pt2 = points2[i];
+    if (status[i] == 0) continue;
+    if (pt2.x < 0 || pt2.y < 0) continue;
+    p1_f.push_back(points1[i]);
+    p2_f.push_back(pt2);
+    st_f.push_back(1);
   }
+
+  points1.swap(p1_f);
+  points2.swap(p2_f);
+  status.swap(st_f);
 }
 
 inline void featureDetection(Mat img_1, vector<Point2f>& points1)

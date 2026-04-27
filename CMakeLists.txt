@@ -157,6 +157,13 @@ add_executable( tello_imu_check
                 ${CMAKE_CURRENT_SOURCE_DIR}/main/check_imu.cpp
               )
 
+# Standalone tool to check that the Tello video stream is received and decoded
+add_executable( tello_video_check
+                ${CMAKE_CURRENT_SOURCE_DIR}/main/check_video.cpp
+                ${LIB_SOURCES}
+                ${LIB_HEADERS}
+              )
+
 if(RUN_SLAM)
   add_definitions(-DRUN_SLAM)
   add_subdirectory(lib_openvslam)
@@ -181,6 +188,17 @@ target_link_libraries( ${PROJECT_NAME}
 target_link_libraries( tello_imu_check
                        Threads::Threads
                      )
+
+target_link_libraries( tello_video_check
+                       Threads::Threads
+                       h264decoder
+                       utils
+                     )
+
+if(NOT RUN_SLAM)
+  # Uses OpenCV highgui/imgproc for display.
+  target_link_libraries(tello_video_check ${OpenCV_LIBRARIES})
+endif()
 
 # Link joystick library only if enabled
 if(JOYSTICK_ENABLED)

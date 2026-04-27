@@ -55,6 +55,7 @@ int main(){
     t.vs->setFrameQueue(&frame_queue);
 
     t.cs->addCommandToQueue("command");
+    t.cs->addCommandToQueue("streamoff");
     t.cs->addCommandToQueue("streamon");
     t.cs->executeQueue();
 
@@ -80,6 +81,9 @@ int main(){
   t.vs->setFrameQueue(&frame_queue);
 
   t.cs->addCommandToQueue("command");
+  // Force the H264 stream to restart so we get SPS/PPS at the beginning.
+  // Without SPS/PPS the decoder will receive slices (e.g. NAL type 0x41) but never output frames.
+  t.cs->addCommandToQueue("streamoff");
   t.cs->addCommandToQueue("streamon");
   t.cs->executeQueue();
 
@@ -94,21 +98,32 @@ int main(){
   {
     std::mutex mtx;
     std::unique_lock<std::mutex> lck(mtx);
-    // Wait until signal received or timeout (300 seconds)
+    // Wait until signal received. Note: condition_variable can wake spuriously,
+    // so we must not treat a non-timeout wakeup as a stop condition.
     while (!g_signal_received) {
-      auto status = cv_run.wait_for(lck, std::chrono::seconds(1));
-      if (status == std::cv_status::timeout) {
-        // Check signal every second, continue waiting
-        continue;
-      } else {
-        // Condition variable was notified
-        break;
-      }
+      cv_run.wait_for(lck, std::chrono::seconds(1));
     }
   }
   
   utils_log::LogWarn() << "----------- Done -----------";
   utils_log::LogWarn() << "----------- Landing -----------";
+
+  // Always attempt to land safely on shutdown.
+#ifndef USE_CONFIG
+  try {
+    if (t.cs) t.cs->land();
+  } catch (...) {
+    // Best-effort only
+  }
+#else
+  try {
+    if(m.count("0.prime.0") > 0 && m["0.prime.0"] && m["0.prime.0"]->cs) {
+      m["0.prime.0"]->cs->land();
+    }
+  } catch (...) {
+    // Best-effort only
+  }
+#endif
 
   // Stop the VO loop
   vo_running = false;

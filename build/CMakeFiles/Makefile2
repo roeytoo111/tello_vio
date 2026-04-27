@@ -67,6 +67,7 @@ all: CMakeFiles/h264decoder.dir/all
 all: CMakeFiles/utils.dir/all
 all: CMakeFiles/tello.dir/all
 all: CMakeFiles/tello_imu_check.dir/all
+all: CMakeFiles/tello_video_check.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -78,6 +79,7 @@ clean: CMakeFiles/h264decoder.dir/clean
 clean: CMakeFiles/utils.dir/clean
 clean: CMakeFiles/tello.dir/clean
 clean: CMakeFiles/tello_imu_check.dir/clean
+clean: CMakeFiles/tello_video_check.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -113,7 +115,7 @@ CMakeFiles/h264decoder.dir/clean:
 CMakeFiles/utils.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=15,16 "Built target utils"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=24,25 "Built target utils"
 .PHONY : CMakeFiles/utils.dir/all
 
 # Build rule for subdir invocation for target.
@@ -184,6 +186,33 @@ tello_imu_check: CMakeFiles/tello_imu_check.dir/rule
 CMakeFiles/tello_imu_check.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_imu_check.dir/build.make CMakeFiles/tello_imu_check.dir/clean
 .PHONY : CMakeFiles/tello_imu_check.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/tello_video_check.dir
+
+# All Build rule for target.
+CMakeFiles/tello_video_check.dir/all: CMakeFiles/h264decoder.dir/all
+CMakeFiles/tello_video_check.dir/all: CMakeFiles/utils.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=15,16,17,18,19,20,21,22,23 "Built target tello_video_check"
+.PHONY : CMakeFiles/tello_video_check.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/tello_video_check.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 13
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tello_video_check.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 0
+.PHONY : CMakeFiles/tello_video_check.dir/rule
+
+# Convenience name for target.
+tello_video_check: CMakeFiles/tello_video_check.dir/rule
+.PHONY : tello_video_check
+
+# clean rule for target.
+CMakeFiles/tello_video_check.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/clean
+.PHONY : CMakeFiles/tello_video_check.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

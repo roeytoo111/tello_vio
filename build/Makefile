@@ -168,6 +168,19 @@ tello_imu_check/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_imu_check.dir/build.make CMakeFiles/tello_imu_check.dir/build
 .PHONY : tello_imu_check/fast
 
+#=============================================================================
+# Target rules for targets named tello_video_check
+
+# Build rule for target.
+tello_video_check: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tello_video_check
+.PHONY : tello_video_check
+
+# fast build rule for target.
+tello_video_check/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/build
+.PHONY : tello_video_check/fast
+
 lib_h264decoder/h264decoder.o: lib_h264decoder/h264decoder.cpp.o
 .PHONY : lib_h264decoder/h264decoder.o
 
@@ -240,6 +253,30 @@ main/check_imu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_imu_check.dir/build.make CMakeFiles/tello_imu_check.dir/main/check_imu.cpp.s
 .PHONY : main/check_imu.cpp.s
 
+main/check_video.o: main/check_video.cpp.o
+.PHONY : main/check_video.o
+
+# target to build an object file
+main/check_video.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/main/check_video.cpp.o
+.PHONY : main/check_video.cpp.o
+
+main/check_video.i: main/check_video.cpp.i
+.PHONY : main/check_video.i
+
+# target to preprocess a source file
+main/check_video.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/main/check_video.cpp.i
+.PHONY : main/check_video.cpp.i
+
+main/check_video.s: main/check_video.cpp.s
+.PHONY : main/check_video.s
+
+# target to generate assembly for a file
+main/check_video.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/main/check_video.cpp.s
+.PHONY : main/check_video.cpp.s
+
 main/main.o: main/main.cpp.o
 .PHONY : main/main.o
 
@@ -294,6 +331,7 @@ src/base_socket.o: src/base_socket.cpp.o
 # target to build an object file
 src/base_socket.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/base_socket.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/base_socket.cpp.o
 .PHONY : src/base_socket.cpp.o
 
 src/base_socket.i: src/base_socket.cpp.i
@@ -302,6 +340,7 @@ src/base_socket.i: src/base_socket.cpp.i
 # target to preprocess a source file
 src/base_socket.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/base_socket.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/base_socket.cpp.i
 .PHONY : src/base_socket.cpp.i
 
 src/base_socket.s: src/base_socket.cpp.s
@@ -310,6 +349,7 @@ src/base_socket.s: src/base_socket.cpp.s
 # target to generate assembly for a file
 src/base_socket.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/base_socket.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/base_socket.cpp.s
 .PHONY : src/base_socket.cpp.s
 
 src/command_socket.o: src/command_socket.cpp.o
@@ -318,6 +358,7 @@ src/command_socket.o: src/command_socket.cpp.o
 # target to build an object file
 src/command_socket.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/command_socket.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/command_socket.cpp.o
 .PHONY : src/command_socket.cpp.o
 
 src/command_socket.i: src/command_socket.cpp.i
@@ -326,6 +367,7 @@ src/command_socket.i: src/command_socket.cpp.i
 # target to preprocess a source file
 src/command_socket.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/command_socket.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/command_socket.cpp.i
 .PHONY : src/command_socket.cpp.i
 
 src/command_socket.s: src/command_socket.cpp.s
@@ -334,6 +376,7 @@ src/command_socket.s: src/command_socket.cpp.s
 # target to generate assembly for a file
 src/command_socket.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/command_socket.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/command_socket.cpp.s
 .PHONY : src/command_socket.cpp.s
 
 src/command_terminal.o: src/command_terminal.cpp.o
@@ -342,6 +385,7 @@ src/command_terminal.o: src/command_terminal.cpp.o
 # target to build an object file
 src/command_terminal.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/command_terminal.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/command_terminal.cpp.o
 .PHONY : src/command_terminal.cpp.o
 
 src/command_terminal.i: src/command_terminal.cpp.i
@@ -350,6 +394,7 @@ src/command_terminal.i: src/command_terminal.cpp.i
 # target to preprocess a source file
 src/command_terminal.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/command_terminal.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/command_terminal.cpp.i
 .PHONY : src/command_terminal.cpp.i
 
 src/command_terminal.s: src/command_terminal.cpp.s
@@ -358,6 +403,7 @@ src/command_terminal.s: src/command_terminal.cpp.s
 # target to generate assembly for a file
 src/command_terminal.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/command_terminal.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/command_terminal.cpp.s
 .PHONY : src/command_terminal.cpp.s
 
 src/config_handler.o: src/config_handler.cpp.o
@@ -366,6 +412,7 @@ src/config_handler.o: src/config_handler.cpp.o
 # target to build an object file
 src/config_handler.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/config_handler.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/config_handler.cpp.o
 .PHONY : src/config_handler.cpp.o
 
 src/config_handler.i: src/config_handler.cpp.i
@@ -374,6 +421,7 @@ src/config_handler.i: src/config_handler.cpp.i
 # target to preprocess a source file
 src/config_handler.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/config_handler.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/config_handler.cpp.i
 .PHONY : src/config_handler.cpp.i
 
 src/config_handler.s: src/config_handler.cpp.s
@@ -382,6 +430,7 @@ src/config_handler.s: src/config_handler.cpp.s
 # target to generate assembly for a file
 src/config_handler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/config_handler.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/config_handler.cpp.s
 .PHONY : src/config_handler.cpp.s
 
 src/state_socket.o: src/state_socket.cpp.o
@@ -390,6 +439,7 @@ src/state_socket.o: src/state_socket.cpp.o
 # target to build an object file
 src/state_socket.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/state_socket.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/state_socket.cpp.o
 .PHONY : src/state_socket.cpp.o
 
 src/state_socket.i: src/state_socket.cpp.i
@@ -398,6 +448,7 @@ src/state_socket.i: src/state_socket.cpp.i
 # target to preprocess a source file
 src/state_socket.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/state_socket.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/state_socket.cpp.i
 .PHONY : src/state_socket.cpp.i
 
 src/state_socket.s: src/state_socket.cpp.s
@@ -406,6 +457,7 @@ src/state_socket.s: src/state_socket.cpp.s
 # target to generate assembly for a file
 src/state_socket.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/state_socket.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/state_socket.cpp.s
 .PHONY : src/state_socket.cpp.s
 
 src/tello.o: src/tello.cpp.o
@@ -414,6 +466,7 @@ src/tello.o: src/tello.cpp.o
 # target to build an object file
 src/tello.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/tello.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/tello.cpp.o
 .PHONY : src/tello.cpp.o
 
 src/tello.i: src/tello.cpp.i
@@ -422,6 +475,7 @@ src/tello.i: src/tello.cpp.i
 # target to preprocess a source file
 src/tello.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/tello.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/tello.cpp.i
 .PHONY : src/tello.cpp.i
 
 src/tello.s: src/tello.cpp.s
@@ -430,6 +484,7 @@ src/tello.s: src/tello.cpp.s
 # target to generate assembly for a file
 src/tello.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/tello.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/tello.cpp.s
 .PHONY : src/tello.cpp.s
 
 src/video_socket.o: src/video_socket.cpp.o
@@ -438,6 +493,7 @@ src/video_socket.o: src/video_socket.cpp.o
 # target to build an object file
 src/video_socket.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/video_socket.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/video_socket.cpp.o
 .PHONY : src/video_socket.cpp.o
 
 src/video_socket.i: src/video_socket.cpp.i
@@ -446,6 +502,7 @@ src/video_socket.i: src/video_socket.cpp.i
 # target to preprocess a source file
 src/video_socket.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/video_socket.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/video_socket.cpp.i
 .PHONY : src/video_socket.cpp.i
 
 src/video_socket.s: src/video_socket.cpp.s
@@ -454,6 +511,7 @@ src/video_socket.s: src/video_socket.cpp.s
 # target to generate assembly for a file
 src/video_socket.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/src/video_socket.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_video_check.dir/build.make CMakeFiles/tello_video_check.dir/src/video_socket.cpp.s
 .PHONY : src/video_socket.cpp.s
 
 # Help Target
@@ -467,6 +525,7 @@ help:
 	@echo "... h264decoder"
 	@echo "... tello"
 	@echo "... tello_imu_check"
+	@echo "... tello_video_check"
 	@echo "... utils"
 	@echo "... lib_h264decoder/h264decoder.o"
 	@echo "... lib_h264decoder/h264decoder.i"
@@ -477,6 +536,9 @@ help:
 	@echo "... main/check_imu.o"
 	@echo "... main/check_imu.i"
 	@echo "... main/check_imu.s"
+	@echo "... main/check_video.o"
+	@echo "... main/check_video.i"
+	@echo "... main/check_video.s"
 	@echo "... main/main.o"
 	@echo "... main/main.i"
 	@echo "... main/main.s"

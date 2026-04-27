@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <stdexcept>
 #include <cmath>
+#include <filesystem>
 
 StateSocket::StateSocket(
   asio::io_service& io_service,
@@ -37,6 +38,23 @@ StateSocket::StateSocket(
     last_rate_calculation_time_ = std::chrono::high_resolution_clock::now();
     imu_message_count_ = 0;
     current_imu_rate_hz_ = 0.0;
+
+    // ---- telemetry CSV logging ----
+    // Always create a folder and a CSV file so IMU/state is saved even if VO/video fails.
+    try {
+      const std::filesystem::path out_dir = std::filesystem::absolute("../telemetry");
+      std::filesystem::create_directories(out_dir);
+      const auto t0 = std::chrono::system_clock::now();
+      const std::time_t t0_tt = std::chrono::system_clock::to_time_t(t0);
+      std::tm t0_tm = *std::localtime(&t0_tt);
+      std::ostringstream fname;
+      fname << (out_dir / "tello_state_").string()
+            << std::put_time(&t0_tm, "%Y_%m_%d_%H_%M_%S")
+            << ".csv";
+      telemetry_csv_.open(fname.str(), std::ios::out);
+    } catch (...) {
+      // Logging is best-effort; do not crash if filesystem is unavailable.
+    }
 
 }
 
@@ -175,6 +193,57 @@ void StateSocket::handleResponseFromDrone(const std::error_code& error, size_t b
     
     updateTelemetry(response_);
 
+    // Log raw state packet to CSV at full rate (~10Hz).
+    if (telemetry_csv_.is_open()) {
+      std::lock_guard<std::mutex> lk(log_mutex_);
+      if (!telemetry_header_written_) {
+        telemetry_csv_
+          << "t_sec,raw,bat,pitch,roll,yaw,vgx,vgy,vgz,agx,agy,agz,baro,tof,h\n";
+        telemetry_header_written_ = true;
+      }
+
+      // Parse key:value pairs
+      std::map<std::string, std::string> m;
+      {
+        std::istringstream iss(response_);
+        std::string token;
+        while (std::getline(iss, token, ';')) {
+          size_t colon_pos = token.find(':');
+          if (colon_pos == std::string::npos) continue;
+          m[token.substr(0, colon_pos)] = token.substr(colon_pos + 1);
+        }
+      }
+
+      const double t_sec =
+        std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();
+
+      auto get = [&](const char* k) -> std::string {
+        auto it = m.find(k);
+        return it == m.end() ? "" : it->second;
+      };
+
+      // raw field: quote and replace quotes if any (very rare)
+      std::string raw = response_;
+      for (char& c : raw) if (c == '"') c = '\'';
+
+      telemetry_csv_ << std::fixed << std::setprecision(6) << t_sec << ","
+                     << "\"" << raw << "\"" << ","
+                     << get("bat") << ","
+                     << get("pitch") << ","
+                     << get("roll") << ","
+                     << get("yaw") << ","
+                     << get("vgx") << ","
+                     << get("vgy") << ","
+                     << get("vgz") << ","
+                     << get("agx") << ","
+                     << get("agy") << ","
+                     << get("agz") << ","
+                     << get("baro") << ","
+                     << get("tof") << ","
+                     << get("h") << "\n";
+      telemetry_csv_.flush();
+    }
+
     // Rate limit IMU display to once per second (state updates ~10 times per second)
     auto now = std::chrono::system_clock::now();
     auto time_since_last = std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -202,6 +271,7 @@ void StateSocket::handleResponseFromDrone(const std::error_code& error, size_t b
 }
 
 StateSocket::~StateSocket(){
+  if (telemetry_csv_.is_open()) telemetry_csv_.close();
   socket_.close();
 }
 

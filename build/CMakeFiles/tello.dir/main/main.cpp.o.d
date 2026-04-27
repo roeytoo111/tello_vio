@@ -832,7 +832,11 @@ CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello_vio/main/main.cpp \
  /home/roey/tello_vio/lib_h264decoder/h264decoder.hpp \
  /home/roey/tello_vio/inc/frame_queue.hpp /usr/include/c++/11/queue \
  /usr/include/c++/11/bits/stl_queue.h \
- /home/roey/tello_vio/inc/state_socket.hpp \
+ /home/roey/tello_vio/inc/state_socket.hpp /usr/include/c++/11/fstream \
+ /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc \
  /home/roey/tello_vio/inc/frame_queue.hpp \
  /home/roey/tello_vio/monocular_vo/include/vo.h \
  /home/roey/tello_vio/monocular_vo/include/vo_utils.h \
@@ -849,8 +853,4 @@ CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello_vio/main/main.cpp \
  /usr/include/opencv4/opencv2/flann/defines.h \
  /usr/include/opencv4/opencv2/flann/config.h \
  /usr/include/opencv4/opencv2/core/affine.hpp \
- /usr/include/opencv4/opencv2/imgproc/imgproc.hpp \
- /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc
+ /usr/include/opencv4/opencv2/imgproc/imgproc.hpp
