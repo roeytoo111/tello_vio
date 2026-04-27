@@ -18,9 +18,8 @@ sudo apt install libasio-dev libopencv-dev libeigen3-dev libavcodec-dev libavuti
 ### With Visual Odometry (default)
 
 ```bash
-mkdir -p build && cd build
-cmake ..
-make -j4
+cmake -S . -B build
+cmake --build build -j
 ```
 
 The VO pipeline is compiled into the main `tello` binary and runs automatically when the drone streams video.
@@ -32,10 +31,10 @@ If you only need command/video/state without VO, comment out the VO source in `C
 ## Run
 
 1. Power on the Tello and connect to its Wi-Fi.
-2. From the build directory:
+2. Run the main app:
 
 ```bash
-./tello
+./build/tello
 ```
 
 **What happens at startup:**
@@ -135,9 +134,67 @@ Camera intrinsics and distortion coefficients are stored in `camera_config.yaml`
 Connect to Tello Wi-Fi, power on the drone, then:
 
 ```bash
-./tello_imu_check
+./build/tello_imu_check
 ```
 
-### Component tests
+### Video stream check
 
-This repo contains standalone component tests under `tests/` (command/state/video/joystick). Build/run them from their own CMake setup if needed.
+Connect to Tello Wi-Fi, power on the drone, then:
+
+```bash
+./build/tello_video_check
+```
+
+This opens an OpenCV window named **Pilot view** and shows decoded frames. Stop with `Ctrl+C`.
+
+## Troubleshooting
+
+### `bind: Address already in use`
+
+Only one process can bind each UDP port at a time (typically `8890` for state and `11111` for video). If you run multiple binaries concurrently you may see:
+
+```text
+bind: Address already in use
+```
+
+Stop the other process, or find who is holding the port:
+
+```bash
+sudo ss -lunp | egrep ':(8890|11111|8889)\b'
+```
+
+### Video is blocky / H264 decode warnings
+
+Some H264 warnings are expected under packet loss (Wi‑Fi interference / range). To improve stability:
+
+- Get closer to the drone (1–3m) with clear line-of-sight
+- Make sure no other process/app is receiving video concurrently
+- Disable Wi‑Fi power saving on Linux:
+
+```bash
+iw dev
+sudo iw dev <your_wifi_iface> set power_save off
+```
+
+### `../snapshots` permission denied
+
+If you see `mkdir: cannot create directory '../snapshots': Permission denied`, fix ownership:
+
+```bash
+sudo chown -R "$USER:$USER" snapshots
+```
+
+### Optional: debug the raw stream with FFmpeg
+
+Install FFmpeg tools:
+
+```bash
+sudo apt update
+sudo apt install -y ffmpeg
+```
+
+Then listen to the raw stream (make sure you already sent `streamon` to the drone):
+
+```bash
+ffplay -fflags nobuffer -flags low_delay -framedrop udp://0.0.0.0:11111
+```
