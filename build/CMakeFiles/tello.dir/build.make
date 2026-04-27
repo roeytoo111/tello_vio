@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/roey/tello
+CMAKE_SOURCE_DIR = /home/roey/tello_vio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/roey/tello/build
+CMAKE_BINARY_DIR = /home/roey/tello_vio/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/tello.dir/depend.make
@@ -72,118 +72,133 @@ include CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/main/main.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/main/main.cpp.o: ../main/main.cpp
 CMakeFiles/tello.dir/main/main.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tello.dir/main/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/main/main.cpp.o -MF CMakeFiles/tello.dir/main/main.cpp.o.d -o CMakeFiles/tello.dir/main/main.cpp.o -c /home/roey/tello/main/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tello.dir/main/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/main/main.cpp.o -MF CMakeFiles/tello.dir/main/main.cpp.o.d -o CMakeFiles/tello.dir/main/main.cpp.o -c /home/roey/tello_vio/main/main.cpp
 
 CMakeFiles/tello.dir/main/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/main/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/main/main.cpp > CMakeFiles/tello.dir/main/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/main/main.cpp > CMakeFiles/tello.dir/main/main.cpp.i
 
 CMakeFiles/tello.dir/main/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/main/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/main/main.cpp -o CMakeFiles/tello.dir/main/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/main/main.cpp -o CMakeFiles/tello.dir/main/main.cpp.s
+
+CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o: CMakeFiles/tello.dir/flags.make
+CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o: ../monocular_vo/src/vo.cpp
+CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o -MF CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o.d -o CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o -c /home/roey/tello_vio/monocular_vo/src/vo.cpp
+
+CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/monocular_vo/src/vo.cpp > CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.i
+
+CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/monocular_vo/src/vo.cpp -o CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.s
 
 CMakeFiles/tello.dir/src/base_socket.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/src/base_socket.cpp.o: ../src/base_socket.cpp
 CMakeFiles/tello.dir/src/base_socket.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tello.dir/src/base_socket.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/base_socket.cpp.o -MF CMakeFiles/tello.dir/src/base_socket.cpp.o.d -o CMakeFiles/tello.dir/src/base_socket.cpp.o -c /home/roey/tello/src/base_socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/tello.dir/src/base_socket.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/base_socket.cpp.o -MF CMakeFiles/tello.dir/src/base_socket.cpp.o.d -o CMakeFiles/tello.dir/src/base_socket.cpp.o -c /home/roey/tello_vio/src/base_socket.cpp
 
 CMakeFiles/tello.dir/src/base_socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/src/base_socket.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/src/base_socket.cpp > CMakeFiles/tello.dir/src/base_socket.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/src/base_socket.cpp > CMakeFiles/tello.dir/src/base_socket.cpp.i
 
 CMakeFiles/tello.dir/src/base_socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/src/base_socket.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/src/base_socket.cpp -o CMakeFiles/tello.dir/src/base_socket.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/src/base_socket.cpp -o CMakeFiles/tello.dir/src/base_socket.cpp.s
 
 CMakeFiles/tello.dir/src/command_socket.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/src/command_socket.cpp.o: ../src/command_socket.cpp
 CMakeFiles/tello.dir/src/command_socket.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/tello.dir/src/command_socket.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/command_socket.cpp.o -MF CMakeFiles/tello.dir/src/command_socket.cpp.o.d -o CMakeFiles/tello.dir/src/command_socket.cpp.o -c /home/roey/tello/src/command_socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/tello.dir/src/command_socket.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/command_socket.cpp.o -MF CMakeFiles/tello.dir/src/command_socket.cpp.o.d -o CMakeFiles/tello.dir/src/command_socket.cpp.o -c /home/roey/tello_vio/src/command_socket.cpp
 
 CMakeFiles/tello.dir/src/command_socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/src/command_socket.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/src/command_socket.cpp > CMakeFiles/tello.dir/src/command_socket.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/src/command_socket.cpp > CMakeFiles/tello.dir/src/command_socket.cpp.i
 
 CMakeFiles/tello.dir/src/command_socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/src/command_socket.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/src/command_socket.cpp -o CMakeFiles/tello.dir/src/command_socket.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/src/command_socket.cpp -o CMakeFiles/tello.dir/src/command_socket.cpp.s
 
 CMakeFiles/tello.dir/src/command_terminal.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/src/command_terminal.cpp.o: ../src/command_terminal.cpp
 CMakeFiles/tello.dir/src/command_terminal.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/tello.dir/src/command_terminal.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/command_terminal.cpp.o -MF CMakeFiles/tello.dir/src/command_terminal.cpp.o.d -o CMakeFiles/tello.dir/src/command_terminal.cpp.o -c /home/roey/tello/src/command_terminal.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tello.dir/src/command_terminal.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/command_terminal.cpp.o -MF CMakeFiles/tello.dir/src/command_terminal.cpp.o.d -o CMakeFiles/tello.dir/src/command_terminal.cpp.o -c /home/roey/tello_vio/src/command_terminal.cpp
 
 CMakeFiles/tello.dir/src/command_terminal.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/src/command_terminal.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/src/command_terminal.cpp > CMakeFiles/tello.dir/src/command_terminal.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/src/command_terminal.cpp > CMakeFiles/tello.dir/src/command_terminal.cpp.i
 
 CMakeFiles/tello.dir/src/command_terminal.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/src/command_terminal.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/src/command_terminal.cpp -o CMakeFiles/tello.dir/src/command_terminal.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/src/command_terminal.cpp -o CMakeFiles/tello.dir/src/command_terminal.cpp.s
 
 CMakeFiles/tello.dir/src/config_handler.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/src/config_handler.cpp.o: ../src/config_handler.cpp
 CMakeFiles/tello.dir/src/config_handler.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tello.dir/src/config_handler.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/config_handler.cpp.o -MF CMakeFiles/tello.dir/src/config_handler.cpp.o.d -o CMakeFiles/tello.dir/src/config_handler.cpp.o -c /home/roey/tello/src/config_handler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tello.dir/src/config_handler.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/config_handler.cpp.o -MF CMakeFiles/tello.dir/src/config_handler.cpp.o.d -o CMakeFiles/tello.dir/src/config_handler.cpp.o -c /home/roey/tello_vio/src/config_handler.cpp
 
 CMakeFiles/tello.dir/src/config_handler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/src/config_handler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/src/config_handler.cpp > CMakeFiles/tello.dir/src/config_handler.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/src/config_handler.cpp > CMakeFiles/tello.dir/src/config_handler.cpp.i
 
 CMakeFiles/tello.dir/src/config_handler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/src/config_handler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/src/config_handler.cpp -o CMakeFiles/tello.dir/src/config_handler.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/src/config_handler.cpp -o CMakeFiles/tello.dir/src/config_handler.cpp.s
 
 CMakeFiles/tello.dir/src/state_socket.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/src/state_socket.cpp.o: ../src/state_socket.cpp
 CMakeFiles/tello.dir/src/state_socket.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tello.dir/src/state_socket.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/state_socket.cpp.o -MF CMakeFiles/tello.dir/src/state_socket.cpp.o.d -o CMakeFiles/tello.dir/src/state_socket.cpp.o -c /home/roey/tello/src/state_socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tello.dir/src/state_socket.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/state_socket.cpp.o -MF CMakeFiles/tello.dir/src/state_socket.cpp.o.d -o CMakeFiles/tello.dir/src/state_socket.cpp.o -c /home/roey/tello_vio/src/state_socket.cpp
 
 CMakeFiles/tello.dir/src/state_socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/src/state_socket.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/src/state_socket.cpp > CMakeFiles/tello.dir/src/state_socket.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/src/state_socket.cpp > CMakeFiles/tello.dir/src/state_socket.cpp.i
 
 CMakeFiles/tello.dir/src/state_socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/src/state_socket.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/src/state_socket.cpp -o CMakeFiles/tello.dir/src/state_socket.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/src/state_socket.cpp -o CMakeFiles/tello.dir/src/state_socket.cpp.s
 
 CMakeFiles/tello.dir/src/tello.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/src/tello.cpp.o: ../src/tello.cpp
 CMakeFiles/tello.dir/src/tello.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tello.dir/src/tello.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/tello.cpp.o -MF CMakeFiles/tello.dir/src/tello.cpp.o.d -o CMakeFiles/tello.dir/src/tello.cpp.o -c /home/roey/tello/src/tello.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tello.dir/src/tello.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/tello.cpp.o -MF CMakeFiles/tello.dir/src/tello.cpp.o.d -o CMakeFiles/tello.dir/src/tello.cpp.o -c /home/roey/tello_vio/src/tello.cpp
 
 CMakeFiles/tello.dir/src/tello.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/src/tello.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/src/tello.cpp > CMakeFiles/tello.dir/src/tello.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/src/tello.cpp > CMakeFiles/tello.dir/src/tello.cpp.i
 
 CMakeFiles/tello.dir/src/tello.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/src/tello.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/src/tello.cpp -o CMakeFiles/tello.dir/src/tello.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/src/tello.cpp -o CMakeFiles/tello.dir/src/tello.cpp.s
 
 CMakeFiles/tello.dir/src/video_socket.cpp.o: CMakeFiles/tello.dir/flags.make
 CMakeFiles/tello.dir/src/video_socket.cpp.o: ../src/video_socket.cpp
 CMakeFiles/tello.dir/src/video_socket.cpp.o: CMakeFiles/tello.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tello.dir/src/video_socket.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/video_socket.cpp.o -MF CMakeFiles/tello.dir/src/video_socket.cpp.o.d -o CMakeFiles/tello.dir/src/video_socket.cpp.o -c /home/roey/tello/src/video_socket.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/tello.dir/src/video_socket.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tello.dir/src/video_socket.cpp.o -MF CMakeFiles/tello.dir/src/video_socket.cpp.o.d -o CMakeFiles/tello.dir/src/video_socket.cpp.o -c /home/roey/tello_vio/src/video_socket.cpp
 
 CMakeFiles/tello.dir/src/video_socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tello.dir/src/video_socket.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello/src/video_socket.cpp > CMakeFiles/tello.dir/src/video_socket.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/roey/tello_vio/src/video_socket.cpp > CMakeFiles/tello.dir/src/video_socket.cpp.i
 
 CMakeFiles/tello.dir/src/video_socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tello.dir/src/video_socket.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello/src/video_socket.cpp -o CMakeFiles/tello.dir/src/video_socket.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/roey/tello_vio/src/video_socket.cpp -o CMakeFiles/tello.dir/src/video_socket.cpp.s
 
 # Object files for target tello
 tello_OBJECTS = \
 "CMakeFiles/tello.dir/main/main.cpp.o" \
+"CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o" \
 "CMakeFiles/tello.dir/src/base_socket.cpp.o" \
 "CMakeFiles/tello.dir/src/command_socket.cpp.o" \
 "CMakeFiles/tello.dir/src/command_terminal.cpp.o" \
@@ -196,6 +211,7 @@ tello_OBJECTS = \
 tello_EXTERNAL_OBJECTS =
 
 tello: CMakeFiles/tello.dir/main/main.cpp.o
+tello: CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o
 tello: CMakeFiles/tello.dir/src/base_socket.cpp.o
 tello: CMakeFiles/tello.dir/src/command_socket.cpp.o
 tello: CMakeFiles/tello.dir/src/command_terminal.cpp.o
@@ -217,7 +233,7 @@ tello: /usr/lib/x86_64-linux-gnu/libopencv_dnn.so.4.5.4d
 tello: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.5.4d
 tello: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.5.4d
 tello: CMakeFiles/tello.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable tello"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable tello"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tello.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -229,6 +245,6 @@ CMakeFiles/tello.dir/clean:
 .PHONY : CMakeFiles/tello.dir/clean
 
 CMakeFiles/tello.dir/depend:
-	cd /home/roey/tello/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/roey/tello /home/roey/tello /home/roey/tello/build /home/roey/tello/build /home/roey/tello/build/CMakeFiles/tello.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/roey/tello_vio/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/roey/tello_vio /home/roey/tello_vio /home/roey/tello_vio/build /home/roey/tello_vio/build /home/roey/tello_vio/build/CMakeFiles/tello.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/tello.dir/depend
 

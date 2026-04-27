@@ -1,6 +1,6 @@
 CMakeFiles/tello.dir/src/base_socket.cpp.o: \
- /home/roey/tello/src/base_socket.cpp /usr/include/stdc-predef.h \
- /home/roey/tello/inc/base_socket.hpp /usr/include/c++/11/thread \
+ /home/roey/tello_vio/src/base_socket.cpp /usr/include/stdc-predef.h \
+ /home/roey/tello_vio/inc/base_socket.hpp /usr/include/c++/11/thread \
  /usr/include/c++/11/bits/std_thread.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

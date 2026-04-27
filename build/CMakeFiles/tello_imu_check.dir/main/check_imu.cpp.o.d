@@ -1,5 +1,5 @@
 CMakeFiles/tello_imu_check.dir/main/check_imu.cpp.o: \
- /home/roey/tello/main/check_imu.cpp /usr/include/stdc-predef.h \
+ /home/roey/tello_vio/main/check_imu.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

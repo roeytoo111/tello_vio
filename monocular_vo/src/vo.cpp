@@ -2,6 +2,10 @@
 #include "frame_queue.hpp"
 #include "state_socket.hpp"
 
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
+
 #define MIN_NUM_FEAT 2000
 
 static double estimateScale(StateSocket& state, double dt)
@@ -16,6 +20,21 @@ static double estimateScale(StateSocket& state, double dt)
 int VisualOdometry::run(FrameQueue& frame_queue, StateSocket& state_socket,
                         const string& camera_config_path, atomic<bool>& run_flag)
 {
+  // ---- trajectory logging ----
+  // Create output directory immediately (even if we never get frames),
+  // so the user can find where logs will be written.
+  const std::filesystem::path out_dir = std::filesystem::absolute("../trajectories");
+  std::filesystem::create_directories(out_dir);
+  const auto t0 = std::chrono::system_clock::now();
+  const std::time_t t0_tt = std::chrono::system_clock::to_time_t(t0);
+  std::tm t0_tm = *std::localtime(&t0_tt);
+  std::ostringstream fname;
+  fname << (out_dir / "vio_trajectory_").string()
+        << std::put_time(&t0_tm, "%Y_%m_%d_%H_%M_%S")
+        << ".csv";
+  std::ofstream traj_csv(fname.str());
+  traj_csv << "t_sec,x_m,y_m,z_m,scale\n";
+
   // ---- calibration ----
   double focal;
   Point2d pp;
@@ -72,6 +91,18 @@ int VisualOdometry::run(FrameQueue& frame_queue, StateSocket& state_socket,
   // ---- initial pose ----
   Mat E, R, t, mask;
   E = findEssentialMat(points2, points1, focal, pp, RANSAC, 0.999, 1.0, mask);
+  if (E.empty()) {
+    cout << "[VO] Essential matrix is empty (init); skipping" << endl;
+    return -1;
+  }
+  // OpenCV may return 3x(3N) when multiple solutions exist; recoverPose requires 3x3.
+  if (E.rows == 3 && E.cols > 3) {
+    E = E(Rect(0, 0, 3, 3)).clone();
+  }
+  if (E.rows != 3 || E.cols != 3) {
+    cout << "[VO] Invalid essential matrix shape (init): " << E.rows << "x" << E.cols << endl;
+    return -1;
+  }
   recoverPose(E, points2, points1, R, t, focal, pp, mask);
 
   Mat R_f = R.clone();
@@ -115,6 +146,22 @@ int VisualOdometry::run(FrameQueue& frame_queue, StateSocket& state_socket,
     }
 
     E = findEssentialMat(curr_features, prev_features, focal, pp, RANSAC, 0.999, 1.0, mask);
+    if (E.empty()) {
+      // Degenerate configuration or too many outliers; re-detect and continue.
+      featureDetection(curr_image, prev_features);
+      prev_image = curr_image.clone();
+      num_frame++;
+      continue;
+    }
+    if (E.rows == 3 && E.cols > 3) {
+      E = E(Rect(0, 0, 3, 3)).clone();
+    }
+    if (E.rows != 3 || E.cols != 3) {
+      featureDetection(curr_image, prev_features);
+      prev_image = curr_image.clone();
+      num_frame++;
+      continue;
+    }
     recoverPose(E, curr_features, prev_features, R, t, focal, pp, mask);
 
     double scale = estimateScale(state_socket, dt);
@@ -126,6 +173,16 @@ int VisualOdometry::run(FrameQueue& frame_queue, StateSocket& state_socket,
       t_f = t_f + scale * (R_f * t);
       R_f = R * R_f;
     }
+
+    // Log current pose (even if scale gate rejected, it still records last estimate)
+    const double t_sec =
+      std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();
+    traj_csv << std::fixed << std::setprecision(6)
+             << t_sec << ","
+             << t_f.at<double>(0) << ","
+             << t_f.at<double>(1) << ","
+             << t_f.at<double>(2) << ","
+             << scale << "\n";
 
     // Re-detect when tracked features drop too low
     if ((int)prev_features.size() < MIN_NUM_FEAT)

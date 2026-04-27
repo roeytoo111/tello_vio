@@ -58,4 +58,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/utils.dir/DependInfo.cmake"
   "CMakeFiles/tello.dir/DependInfo.cmake"
   "CMakeFiles/tello_imu_check.dir/DependInfo.cmake"
+  "CMakeFiles/tello_video_check.dir/DependInfo.cmake"
   )

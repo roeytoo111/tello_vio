@@ -1,4 +1,4 @@
-# Install script for directory: /home/roey/tello
+# Install script for directory: /home/roey/tello_vio
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/roey/tello/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/roey/tello_vio/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

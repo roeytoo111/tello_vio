@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/tello.dir/main/main.cpp.o"
   "CMakeFiles/tello.dir/main/main.cpp.o.d"
+  "CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o"
+  "CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o.d"
   "CMakeFiles/tello.dir/src/base_socket.cpp.o"
   "CMakeFiles/tello.dir/src/base_socket.cpp.o.d"
   "CMakeFiles/tello.dir/src/command_socket.cpp.o"

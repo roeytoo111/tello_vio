@@ -43,6 +43,7 @@ to the encoded data, which must be kept around  between calls to
 parse- and decode frame. In release 11 it is put on the stack, too.
   */
   AVPacket              *pkt;
+  bool packet_sent_ = false;
 public:
   H264Decoder();
   ~H264Decoder();
@@ -54,7 +55,12 @@ bytes at frame boundaries.
   */
   ssize_t parse(const unsigned char* in_data, ssize_t in_size);
   bool is_frame_available() const;
-  const AVFrame& decode_frame();
+  // Feed a single encoded chunk (e.g. one NAL unit or access unit).
+  void feed_packet(const unsigned char* data, size_t size);
+  // Try to decode one frame from the last fed packet.
+  // Returns true if a decoded frame is available via get_frame().
+  bool try_decode();
+  const AVFrame& get_frame() const;
 };
 
 // TODO: Rename to OutputStage or so?!

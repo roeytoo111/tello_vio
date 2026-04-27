@@ -1,6 +1,6 @@
 CMakeFiles/utils.dir/lib_utils/utils.cpp.o: \
- /home/roey/tello/lib_utils/utils.cpp /usr/include/stdc-predef.h \
- /home/roey/tello/lib_utils/utils.hpp /usr/include/c++/11/iostream \
+ /home/roey/tello_vio/lib_utils/utils.cpp /usr/include/stdc-predef.h \
+ /home/roey/tello_vio/lib_utils/utils.hpp /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \

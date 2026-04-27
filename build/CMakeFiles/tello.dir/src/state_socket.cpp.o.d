@@ -1,7 +1,7 @@
 CMakeFiles/tello.dir/src/state_socket.cpp.o: \
- /home/roey/tello/src/state_socket.cpp /usr/include/stdc-predef.h \
- /home/roey/tello/inc/state_socket.hpp \
- /home/roey/tello/inc/base_socket.hpp /usr/include/c++/11/thread \
+ /home/roey/tello_vio/src/state_socket.cpp /usr/include/stdc-predef.h \
+ /home/roey/tello_vio/inc/state_socket.hpp \
+ /home/roey/tello_vio/inc/base_socket.hpp /usr/include/c++/11/thread \
  /usr/include/c++/11/bits/std_thread.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -753,7 +753,11 @@ CMakeFiles/tello.dir/src/state_socket.cpp.o: \
  /usr/include/asio/windows/random_access_handle.hpp \
  /usr/include/asio/windows/stream_handle.hpp /usr/include/asio/write.hpp \
  /usr/include/asio/write_at.hpp /usr/include/asio/impl/write_at.hpp \
- /home/roey/tello/lib_utils/utils.hpp /usr/include/c++/11/iostream \
+ /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc \
+ /home/roey/tello_vio/lib_utils/utils.hpp /usr/include/c++/11/iostream \
  /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
  /usr/include/c++/11/bits/stl_map.h \
  /usr/include/c++/11/bits/stl_multimap.h /usr/include/c++/11/iomanip \
@@ -761,8 +765,7 @@ CMakeFiles/tello.dir/src/state_socket.cpp.o: \
  /usr/include/c++/11/bits/locale_facets_nonio.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/11/bits/codecvt.h \
- /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+ /usr/include/libintl.h /usr/include/c++/11/bits/locale_facets_nonio.tcc \
  /usr/include/c++/11/bits/locale_conv.h \
  /usr/include/c++/11/bits/quoted_string.h /usr/include/c++/11/cmath \
  /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
@@ -785,4 +788,7 @@ CMakeFiles/tello.dir/src/state_socket.cpp.o: \
  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
- /usr/include/c++/11/tr1/riemann_zeta.tcc
+ /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/filesystem \
+ /usr/include/c++/11/bits/fs_fwd.h /usr/include/c++/11/bits/fs_path.h \
+ /usr/include/c++/11/codecvt /usr/include/c++/11/bits/fs_dir.h \
+ /usr/include/c++/11/bits/fs_ops.h

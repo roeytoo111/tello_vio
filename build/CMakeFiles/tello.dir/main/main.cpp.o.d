@@ -1,4 +1,4 @@
-CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello/main/main.cpp \
+CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello_vio/main/main.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/mutex \
  /usr/include/c++/11/tuple /usr/include/c++/11/utility \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -176,7 +176,9 @@ CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello/main/main.cpp \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /usr/include/c++/11/atomic /usr/include/c++/11/bits/atomic_base.h \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
- /home/roey/tello/lib_utils/utils.hpp /usr/include/c++/11/iostream \
+ /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
+ /usr/include/c++/11/bits/this_thread_sleep.h \
+ /home/roey/tello_vio/lib_utils/utils.hpp /usr/include/c++/11/iostream \
  /usr/include/c++/11/ostream /usr/include/c++/11/ios \
  /usr/include/c++/11/bits/ios_base.h \
  /usr/include/c++/11/bits/locale_classes.h \
@@ -192,7 +194,7 @@ CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello/main/main.cpp \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc /home/roey/tello/inc/tello.hpp \
+ /usr/include/c++/11/bits/sstream.tcc /home/roey/tello_vio/inc/tello.hpp \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_tempbuf.h \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -201,11 +203,9 @@ CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello/main/main.cpp \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
  /usr/include/c++/11/pstl/execution_defs.h \
- /home/roey/tello/inc/command_socket.hpp /usr/include/c++/11/deque \
+ /home/roey/tello_vio/inc/command_socket.hpp /usr/include/c++/11/deque \
  /usr/include/c++/11/bits/stl_deque.h /usr/include/c++/11/bits/deque.tcc \
- /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
- /usr/include/c++/11/bits/this_thread_sleep.h \
- /home/roey/tello/inc/base_socket.hpp /usr/include/asio.hpp \
+ /home/roey/tello_vio/inc/base_socket.hpp /usr/include/asio.hpp \
  /usr/include/asio/associated_allocator.hpp \
  /usr/include/asio/detail/config.hpp /usr/include/linux/version.h \
  /usr/include/asio/detail/type_traits.hpp \
@@ -754,7 +754,7 @@ CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello/main/main.cpp \
  /usr/include/asio/windows/random_access_handle.hpp \
  /usr/include/asio/windows/stream_handle.hpp /usr/include/asio/write.hpp \
  /usr/include/asio/write_at.hpp /usr/include/asio/impl/write_at.hpp \
- /home/roey/tello/inc/video_socket.hpp \
+ /home/roey/tello_vio/inc/video_socket.hpp \
  /usr/include/x86_64-linux-gnu/libavutil/frame.h \
  /usr/include/x86_64-linux-gnu/libavutil/avutil.h \
  /usr/include/x86_64-linux-gnu/libavutil/common.h /usr/include/inttypes.h \
@@ -829,5 +829,28 @@ CMakeFiles/tello.dir/main/main.cpp.o: /home/roey/tello/main/main.cpp \
  /usr/include/opencv4/opencv2/core/ovx.hpp \
  /usr/include/opencv4/opencv2/core/cvdef.h \
  /usr/include/opencv4/opencv2/videoio.hpp \
- /home/roey/tello/lib_h264decoder/h264decoder.hpp \
- /home/roey/tello/inc/state_socket.hpp
+ /home/roey/tello_vio/lib_h264decoder/h264decoder.hpp \
+ /home/roey/tello_vio/inc/frame_queue.hpp /usr/include/c++/11/queue \
+ /usr/include/c++/11/bits/stl_queue.h \
+ /home/roey/tello_vio/inc/state_socket.hpp /usr/include/c++/11/fstream \
+ /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc \
+ /home/roey/tello_vio/inc/frame_queue.hpp \
+ /home/roey/tello_vio/monocular_vo/include/vo.h \
+ /home/roey/tello_vio/monocular_vo/include/vo_utils.h \
+ /usr/include/opencv4/opencv2/video/tracking.hpp \
+ /usr/include/opencv4/opencv2/imgproc.hpp \
+ /usr/include/opencv4/opencv2/imgproc/segmentation.hpp \
+ /usr/include/opencv4/opencv2/highgui/highgui.hpp \
+ /usr/include/opencv4/opencv2/highgui.hpp \
+ /usr/include/opencv4/opencv2/imgcodecs.hpp \
+ /usr/include/opencv4/opencv2/calib3d/calib3d.hpp \
+ /usr/include/opencv4/opencv2/calib3d.hpp \
+ /usr/include/opencv4/opencv2/features2d.hpp \
+ /usr/include/opencv4/opencv2/flann/miniflann.hpp \
+ /usr/include/opencv4/opencv2/flann/defines.h \
+ /usr/include/opencv4/opencv2/flann/config.h \
+ /usr/include/opencv4/opencv2/core/affine.hpp \
+ /usr/include/opencv4/opencv2/imgproc/imgproc.hpp

@@ -5,6 +5,8 @@
 #include <chrono>
 #include <memory>
 #include <atomic>
+#include <fstream>
+#include <mutex>
 
 // Forward declarations (removed - no longer needed)
 
@@ -62,7 +64,9 @@ private:
   
   // For rate limiting IMU display
   std::chrono::system_clock::time_point last_display_time_;
-  static constexpr int display_interval_ms_ = 1000; // Display every 1 second
+  // Printing IMU to terminal is noisy; keep logging to CSV at full rate but
+  // print to terminal less frequently so video/VO logs are visible.
+  static constexpr int display_interval_ms_ = 5000; // Display every 5 seconds
   
   // For IMU rate tracking
   std::chrono::high_resolution_clock::time_point imu_rate_start_time_;
@@ -84,6 +88,11 @@ private:
   // Telemetry for VO scale estimation (updated on every state message)
   std::atomic<int> vgx_{0}, vgy_{0}, vgz_{0};
   std::atomic<int> height_{0};
+
+  // Telemetry logging (state packets) to CSV
+  std::mutex log_mutex_;
+  std::ofstream telemetry_csv_;
+  bool telemetry_header_written_ = false;
 
 };
 

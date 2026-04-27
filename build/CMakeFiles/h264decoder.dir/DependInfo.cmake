@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/roey/tello/lib_h264decoder/h264decoder.cpp" "CMakeFiles/h264decoder.dir/lib_h264decoder/h264decoder.cpp.o" "gcc" "CMakeFiles/h264decoder.dir/lib_h264decoder/h264decoder.cpp.o.d"
+  "/home/roey/tello_vio/lib_h264decoder/h264decoder.cpp" "CMakeFiles/h264decoder.dir/lib_h264decoder/h264decoder.cpp.o" "gcc" "CMakeFiles/h264decoder.dir/lib_h264decoder/h264decoder.cpp.o.d"
   )
 
 # Targets to which this target links.
