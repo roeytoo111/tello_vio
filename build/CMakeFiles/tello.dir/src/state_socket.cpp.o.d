@@ -1,7 +1,7 @@
 CMakeFiles/tello.dir/src/state_socket.cpp.o: \
- /home/roey/tello/src/state_socket.cpp /usr/include/stdc-predef.h \
- /home/roey/tello/inc/state_socket.hpp \
- /home/roey/tello/inc/base_socket.hpp /usr/include/c++/11/thread \
+ /home/roey/tello_vio/src/state_socket.cpp /usr/include/stdc-predef.h \
+ /home/roey/tello_vio/inc/state_socket.hpp \
+ /home/roey/tello_vio/inc/base_socket.hpp /usr/include/c++/11/thread \
  /usr/include/c++/11/bits/std_thread.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -753,7 +753,7 @@ CMakeFiles/tello.dir/src/state_socket.cpp.o: \
  /usr/include/asio/windows/random_access_handle.hpp \
  /usr/include/asio/windows/stream_handle.hpp /usr/include/asio/write.hpp \
  /usr/include/asio/write_at.hpp /usr/include/asio/impl/write_at.hpp \
- /home/roey/tello/lib_utils/utils.hpp /usr/include/c++/11/iostream \
+ /home/roey/tello_vio/lib_utils/utils.hpp /usr/include/c++/11/iostream \
  /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
  /usr/include/c++/11/bits/stl_map.h \
  /usr/include/c++/11/bits/stl_multimap.h /usr/include/c++/11/iomanip \

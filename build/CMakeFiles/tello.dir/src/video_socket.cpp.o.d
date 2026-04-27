@@ -1,5 +1,5 @@
 CMakeFiles/tello.dir/src/video_socket.cpp.o: \
- /home/roey/tello/src/video_socket.cpp /usr/include/stdc-predef.h \
+ /home/roey/tello_vio/src/video_socket.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/queue /usr/include/c++/11/deque \
  /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -280,9 +280,9 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: \
  /usr/include/opencv4/opencv2/videoio.hpp \
  /usr/include/opencv4/opencv2/imgproc.hpp \
  /usr/include/opencv4/opencv2/imgproc/segmentation.hpp \
- /home/roey/tello/inc/video_socket.hpp /usr/include/c++/11/atomic \
+ /home/roey/tello_vio/inc/video_socket.hpp /usr/include/c++/11/atomic \
  /usr/include/opencv4/opencv2/core/core.hpp \
- /home/roey/tello/inc/base_socket.hpp /usr/include/c++/11/thread \
+ /home/roey/tello_vio/inc/base_socket.hpp /usr/include/c++/11/thread \
  /usr/include/c++/11/bits/std_thread.h \
  /usr/include/c++/11/bits/this_thread_sleep.h /usr/include/asio.hpp \
  /usr/include/asio/associated_allocator.hpp \
@@ -838,5 +838,6 @@ CMakeFiles/tello.dir/src/video_socket.cpp.o: \
  /usr/include/asio/windows/random_access_handle.hpp \
  /usr/include/asio/windows/stream_handle.hpp /usr/include/asio/write.hpp \
  /usr/include/asio/write_at.hpp /usr/include/asio/impl/write_at.hpp \
- /home/roey/tello/lib_h264decoder/h264decoder.hpp \
- /home/roey/tello/lib_utils/utils.hpp
+ /home/roey/tello_vio/lib_h264decoder/h264decoder.hpp \
+ /home/roey/tello_vio/inc/frame_queue.hpp \
+ /home/roey/tello_vio/lib_utils/utils.hpp

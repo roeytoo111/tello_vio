@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/roey/tello/main/check_imu.cpp" "CMakeFiles/tello_imu_check.dir/main/check_imu.cpp.o" "gcc" "CMakeFiles/tello_imu_check.dir/main/check_imu.cpp.o.d"
+  "/home/roey/tello_vio/main/check_imu.cpp" "CMakeFiles/tello_imu_check.dir/main/check_imu.cpp.o" "gcc" "CMakeFiles/tello_imu_check.dir/main/check_imu.cpp.o.d"
   )
 
 # Targets to which this target links.

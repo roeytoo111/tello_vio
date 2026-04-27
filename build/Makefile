@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/roey/tello
+CMAKE_SOURCE_DIR = /home/roey/tello_vio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/roey/tello/build
+CMAKE_BINARY_DIR = /home/roey/tello_vio/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles /home/roey/tello/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles /home/roey/tello_vio/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -263,6 +263,30 @@ main/main.s: main/main.cpp.s
 main/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/main/main.cpp.s
 .PHONY : main/main.cpp.s
+
+monocular_vo/src/vo.o: monocular_vo/src/vo.cpp.o
+.PHONY : monocular_vo/src/vo.o
+
+# target to build an object file
+monocular_vo/src/vo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.o
+.PHONY : monocular_vo/src/vo.cpp.o
+
+monocular_vo/src/vo.i: monocular_vo/src/vo.cpp.i
+.PHONY : monocular_vo/src/vo.i
+
+# target to preprocess a source file
+monocular_vo/src/vo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.i
+.PHONY : monocular_vo/src/vo.cpp.i
+
+monocular_vo/src/vo.s: monocular_vo/src/vo.cpp.s
+.PHONY : monocular_vo/src/vo.s
+
+# target to generate assembly for a file
+monocular_vo/src/vo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/monocular_vo/src/vo.cpp.s
+.PHONY : monocular_vo/src/vo.cpp.s
 
 src/base_socket.o: src/base_socket.cpp.o
 .PHONY : src/base_socket.o
@@ -456,6 +480,9 @@ help:
 	@echo "... main/main.o"
 	@echo "... main/main.i"
 	@echo "... main/main.s"
+	@echo "... monocular_vo/src/vo.o"
+	@echo "... monocular_vo/src/vo.i"
+	@echo "... monocular_vo/src/vo.s"
 	@echo "... src/base_socket.o"
 	@echo "... src/base_socket.i"
 	@echo "... src/base_socket.s"

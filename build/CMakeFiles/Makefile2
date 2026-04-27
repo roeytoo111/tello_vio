@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/roey/tello
+CMAKE_SOURCE_DIR = /home/roey/tello_vio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/roey/tello/build
+CMAKE_BINARY_DIR = /home/roey/tello_vio/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -87,14 +87,14 @@ clean: CMakeFiles/tello_imu_check.dir/clean
 CMakeFiles/h264decoder.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/h264decoder.dir/build.make CMakeFiles/h264decoder.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/h264decoder.dir/build.make CMakeFiles/h264decoder.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=1,2 "Built target h264decoder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=1,2 "Built target h264decoder"
 .PHONY : CMakeFiles/h264decoder.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/h264decoder.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/h264decoder.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 0
 .PHONY : CMakeFiles/h264decoder.dir/rule
 
 # Convenience name for target.
@@ -113,14 +113,14 @@ CMakeFiles/h264decoder.dir/clean:
 CMakeFiles/utils.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=14,15 "Built target utils"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=15,16 "Built target utils"
 .PHONY : CMakeFiles/utils.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/utils.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/utils.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 0
 .PHONY : CMakeFiles/utils.dir/rule
 
 # Convenience name for target.
@@ -140,14 +140,14 @@ CMakeFiles/tello.dir/all: CMakeFiles/h264decoder.dir/all
 CMakeFiles/tello.dir/all: CMakeFiles/utils.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello.dir/build.make CMakeFiles/tello.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11 "Built target tello"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12 "Built target tello"
 .PHONY : CMakeFiles/tello.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tello.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tello.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 0
 .PHONY : CMakeFiles/tello.dir/rule
 
 # Convenience name for target.
@@ -166,14 +166,14 @@ CMakeFiles/tello.dir/clean:
 CMakeFiles/tello_imu_check.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_imu_check.dir/build.make CMakeFiles/tello_imu_check.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tello_imu_check.dir/build.make CMakeFiles/tello_imu_check.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello/build/CMakeFiles --progress-num=12,13 "Built target tello_imu_check"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/roey/tello_vio/build/CMakeFiles --progress-num=13,14 "Built target tello_imu_check"
 .PHONY : CMakeFiles/tello_imu_check.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tello_imu_check.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tello_imu_check.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/roey/tello_vio/build/CMakeFiles 0
 .PHONY : CMakeFiles/tello_imu_check.dir/rule
 
 # Convenience name for target.

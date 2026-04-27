@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DASIO_STANDALONE -Dh264decoder_EXPORTS
 
-CXX_INCLUDES = -I/home/roey/tello/inc -I/home/roey/tello/lib_h264decoder -I/home/roey/tello/lib_utils -I/home/roey/tello/lib_openvslam/openvslam/src -I/usr/include/eigen3
+CXX_INCLUDES = -I/home/roey/tello_vio/inc -I/home/roey/tello_vio/lib_h264decoder -I/home/roey/tello_vio/lib_utils -I/home/roey/tello_vio/lib_openvslam/openvslam/src -I/home/roey/tello_vio/monocular_vo/include -I/usr/include/eigen3
 
 CXX_FLAGS =  -g -O0 -DDEBUG -fPIC   -std=c++17
 

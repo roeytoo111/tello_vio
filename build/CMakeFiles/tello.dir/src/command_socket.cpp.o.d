@@ -1,6 +1,6 @@
 CMakeFiles/tello.dir/src/command_socket.cpp.o: \
- /home/roey/tello/src/command_socket.cpp /usr/include/stdc-predef.h \
- /home/roey/tello/inc/command_socket.hpp /usr/include/c++/11/chrono \
+ /home/roey/tello_vio/src/command_socket.cpp /usr/include/stdc-predef.h \
+ /home/roey/tello_vio/inc/command_socket.hpp /usr/include/c++/11/chrono \
  /usr/include/c++/11/ratio /usr/include/c++/11/type_traits \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -152,7 +152,7 @@ CMakeFiles/tello.dir/src/command_socket.cpp.o: \
  /usr/include/c++/11/bits/allocated_ptr.h \
  /usr/include/c++/11/ext/aligned_buffer.h \
  /usr/include/c++/11/ext/concurrence.h \
- /home/roey/tello/inc/base_socket.hpp /usr/include/asio.hpp \
+ /home/roey/tello_vio/inc/base_socket.hpp /usr/include/asio.hpp \
  /usr/include/asio/associated_allocator.hpp \
  /usr/include/asio/detail/config.hpp /usr/include/unistd.h \
  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
@@ -754,4 +754,4 @@ CMakeFiles/tello.dir/src/command_socket.cpp.o: \
  /usr/include/asio/windows/random_access_handle.hpp \
  /usr/include/asio/windows/stream_handle.hpp /usr/include/asio/write.hpp \
  /usr/include/asio/write_at.hpp /usr/include/asio/impl/write_at.hpp \
- /home/roey/tello/lib_utils/utils.hpp /usr/include/c++/11/iostream
+ /home/roey/tello_vio/lib_utils/utils.hpp /usr/include/c++/11/iostream

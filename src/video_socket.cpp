@@ -104,7 +104,8 @@ void VideoSocket::handleResponseFromDrone(const std::error_code& error, size_t b
     utils_log::LogInfo() << "Frame buffer overflow. Dropping frame";
     first_empty_index = 0;
     frame_buffer_n_packets_ = 0;
-    return;
+    // Don't return early: we must re-arm async_receive_from below.
+    bytes_recvd = 0;
   }
 
   if (bytes_recvd > 0) {
@@ -115,7 +116,8 @@ void VideoSocket::handleResponseFromDrone(const std::error_code& error, size_t b
 
   if (bytes_recvd < 1460 && bytes_recvd > 0) {
     decodeFrame();
-    first_empty_index = 0;
+    // decodeFrame() keeps any unconsumed bytes in the buffer, so we should not
+    // blindly reset first_empty_index here.
     frame_buffer_n_packets_ = 0;
   }
 
@@ -130,49 +132,76 @@ void VideoSocket::handleResponseFromDrone(const std::error_code& error, size_t b
 void VideoSocket::decodeFrame()
 {
   size_t next = 0;
+  const size_t total = first_empty_index;
   try {
-    while (next < first_empty_index) {
-      ssize_t consumed = decoder_.parse((unsigned char*)&frame_buffer_ + next, first_empty_index - next);
+    while (next < total) {
+      const ssize_t consumed =
+        decoder_.parse(reinterpret_cast<const unsigned char*>(frame_buffer_) + next,
+                       static_cast<ssize_t>(total - next));
+
+      // If the parser doesn't consume input, break to avoid an infinite loop
+      // on malformed/incomplete streams (e.g. missing SPS/PPS at startup).
+      if (consumed <= 0) {
+        utils_log::LogWarn() << "H264 parser consumed " << consumed
+                             << " bytes. Waiting for more data.";
+        break;
+      }
 
       if (decoder_.is_frame_available()) {
-        const AVFrame &frame = decoder_.decode_frame();
-        unsigned char bgr24[converter_.predict_size(frame.width, frame.height)];
-        converter_.convert(frame, bgr24);
+        try {
+          const AVFrame &frame = decoder_.decode_frame();
+          std::vector<unsigned char> bgr24(
+            static_cast<size_t>(converter_.predict_size(frame.width, frame.height)));
+          converter_.convert(frame, bgr24.data());
 
-        cv::Mat mat{frame.height, frame.width, CV_8UC3, bgr24};
+          cv::Mat mat{frame.height, frame.width, CV_8UC3, bgr24.data()};
 
-        if(snap_) takeSnapshot(mat);
+          if(snap_) takeSnapshot(mat);
 
 #ifdef RECORD
-        video->write(mat.clone());
+          video->write(mat.clone());
 #endif
 
-        if (frame_queue_) {
-          frame_queue_->push(mat);
-        }
+          if (frame_queue_) {
+            frame_queue_->push(mat);
+          }
 #ifdef RUN_SLAM
-        else {
-          cv::Mat greyMat;
-          cv::cvtColor(mat, greyMat, cv::COLOR_BGR2GRAY);
-          api_->addFrameToQueue(greyMat);
-          {
-            std::unique_lock<std::mutex> lk(api_->getMutex());
+          else {
+            cv::Mat greyMat;
+            cv::cvtColor(mat, greyMat, cv::COLOR_BGR2GRAY);
+            api_->addFrameToQueue(greyMat);
+            {
+              std::unique_lock<std::mutex> lk(api_->getMutex());
+              cv::imshow("Pilot view", mat.clone());
+              cv::waitKey(1);
+            }
+          }
+#else
+          else {
             cv::imshow("Pilot view", mat.clone());
             cv::waitKey(1);
           }
-        }
-#else
-        else {
-          cv::imshow("Pilot view", mat.clone());
-          cv::waitKey(1);
-        }
 #endif
+        } catch (const std::exception& e) {
+          utils_log::LogWarn() << "H264 decode failed: " << e.what();
+        } catch (...) {
+          utils_log::LogWarn() << "H264 decode failed: unknown exception";
+        }
       }
       next += consumed;
     }
   }
   catch (...) {
     utils_log::LogErr() << "Error in decoding frame";
+  }
+
+  // Keep any unconsumed bytes for the next call (stream-style parsing).
+  if (next > 0 && next < total) {
+    const size_t remaining = total - next;
+    memmove(frame_buffer_, frame_buffer_ + next, remaining);
+    first_empty_index = remaining;
+  } else if (next >= total) {
+    first_empty_index = 0;
   }
 }
 
